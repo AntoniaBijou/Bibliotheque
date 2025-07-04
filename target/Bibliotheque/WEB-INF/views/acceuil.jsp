@@ -5,7 +5,7 @@
 
         <head>
             <title>Page d'accueil</title>
-            <link href="${pageContext.request.contextPath}/assets/css/acceuil.css" rel="stylesheet">
+            <!-- <link href="${pageContext.request.contextPath}/assets/css/acceuil.css" rel="stylesheet"> -->
 
         </head>
 

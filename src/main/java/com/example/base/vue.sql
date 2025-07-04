@@ -13,14 +13,15 @@ LEFT JOIN Exemplaire e ON l.idLivre = e.idLivre
 GROUP BY e.idExemplaire;
 
 
-CREATE VIEW Vue_Reservations_Detaillees AS
-SELECT 
-    r.idReservation,
-    r.dateReservation,
-    r.statut,
+CREATE OR REPLACE VIEW Vue_Reservations_Detaillees AS
+SELECT
+    r.idReservation AS idReservation,
     a.nom AS nomAdherant,
-    l.titre AS titreLivre
+    l.titre AS titreLivre,
+    r.dateReservation AS dateReservation,
+    r.statut AS statut
 FROM Reservation r
 JOIN Adherant a ON r.idAdherant = a.idAdherant
 JOIN Exemplaire e ON r.idExemplaire = e.idExemplaire
 JOIN Livre l ON e.idLivre = l.idLivre;
+

@@ -16,6 +16,7 @@ com\example\model\Prolongement.class
 com\example\model\Exemplaire.class
 com\example\controller\AdminController.class
 com\example\service\LivreService.class
+com\example\controller\AdminReservationController.class
 com\example\repository\LivreRepository.class
 com\example\model\Auteur.class
 com\example\model\Pret.class

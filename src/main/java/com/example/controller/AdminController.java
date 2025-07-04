@@ -29,7 +29,7 @@ public class AdminController {
         Admin admin = adminService.verifierConnexion(nom, email, password);
 
         if (admin != null) {
-            mav.setViewName("redirect:/adminDashboard");
+            mav.setViewName("redirect:/dashboard");
         } else {
             mav.setViewName("/admin");
             mav.addObject("erreur", "Identifiants incorrects.");
