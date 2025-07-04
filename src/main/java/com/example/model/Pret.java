@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Table(name = "Pret")
 public class Pret {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idPret", nullable = false)
     private Integer idPret;
 
@@ -34,9 +35,9 @@ public class Pret {
     public Pret() {
     }
 
-    public Pret(Integer idPret, LocalDate dateEmprunt, LocalDate dateRetour, 
-               String typePret, String status, Exemplaire exemplaire, 
-               Adherant adherant) {
+    public Pret(Integer idPret, LocalDate dateEmprunt, LocalDate dateRetour,
+            String typePret, String status, Exemplaire exemplaire,
+            Adherant adherant) {
         this.idPret = idPret;
         this.dateEmprunt = dateEmprunt;
         this.dateRetour = dateRetour;

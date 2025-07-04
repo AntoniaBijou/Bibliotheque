@@ -11,4 +11,6 @@ public interface AdherantRepository extends JpaRepository<Adherant, Integer> {
 
     Adherant findByNom(String nom);
 
+    
+
 }

@@ -6,7 +6,7 @@
 
         <head>
             <title>Admin Dashboard</title>
-            <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet">
+            <!-- <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet"> -->
 
         </head>
 
@@ -16,12 +16,18 @@
                 <h3>Admin</h3>
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/admin/dashboard">Tableau de bord</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/listePrets">Liste des prêts</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/formPret">Emprunt</a></li>
+
+                    <!-- ✅ Ajout -->
                     <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
                 </ul>
                 <form method="post" action="${pageContext.request.contextPath}/admin/logout">
                     <button class="logout-btn">Se déconnecter</button>
                 </form>
             </div>
+
+
 
             <div class="main">
                 <h2>Liste de toutes les réservations</h2>

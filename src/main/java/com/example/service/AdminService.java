@@ -15,4 +15,6 @@ public class AdminService {
     public Admin verifierConnexion(String nom, String email, String motDePasse) {
         return adminRepository.verifierConnexion(nom, email, motDePasse);
     }
+
+    
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login Admin</title>
-        <link href="${pageContext.request.contextPath}/assets/css/admin.css" rel="stylesheet">
+        <!-- <link href="${pageContext.request.contextPath}/assets/css/admin.css" rel="stylesheet"> -->
 
 </head>
 <body>

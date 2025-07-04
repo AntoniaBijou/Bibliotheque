@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Page de Connexion</title>
-    <link href="${pageContext.request.contextPath}/assets/css/index.css" rel="stylesheet">
+    <!-- <link href="${pageContext.request.contextPath}/assets/css/index.css" rel="stylesheet"> -->
 </head>
 <body>
     <div class="login-container">
