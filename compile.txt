@@ -1,0 +1,1 @@
+mvn clean package;cp target\*.war 'D:\ITU\S4\MrNaina\apache-tomcat-9.0.105\webapps'
