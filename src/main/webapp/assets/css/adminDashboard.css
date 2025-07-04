@@ -1,25 +1,232 @@
-        body { display: flex; font-family: Arial, sans-serif; margin: 0; }
-        .sidebar {
-            width: 220px; background-color: #34495e; color: white; height: 100vh;
-            padding: 20px; box-sizing: border-box;
-        }
-        .sidebar h3 { margin-top: 0; }
-        .sidebar ul { list-style: none; padding: 0; }
-        .sidebar li { margin: 10px 0; }
-        .sidebar a, .sidebar button {
-            color: white; text-decoration: none; background: none;
-            border: none; cursor: pointer; display: block;
-        }
-        .main {
-            flex-grow: 1; padding: 20px;
-        }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
-        .btn-valider {
-            background-color: #27ae60; color: white; border: none;
-            padding: 5px 10px; border-radius: 3px; cursor: pointer;
-        }
-        .logout-btn {
-            background-color: #e74c3c; padding: 10px;
-            border: none; border-radius: 5px; margin-top: 20px;
-        }
+/* assets/css/adminDashboard.css */
+
+/* Reset et base */
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2c3e50;
+  --danger-color: #e74c3c;
+  --success-color: #2ecc71;
+  --light-gray: #f5f7fa;
+  --dark-gray: #34495e;
+  --sidebar-width: 250px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+body {
+  background-color: var(--light-gray);
+  display: flex;
+  min-height: 100vh;
+  color: var(--secondary-color);
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--secondary-color);
+  color: white;
+  padding: 2rem 1.5rem;
+  height: 100vh;
+  position: fixed;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h3 {
+  color: white;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.sidebar li {
+  margin-bottom: 0.8rem;
+}
+
+.sidebar a {
+  display: block;
+  color: #bdc3c7;
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.sidebar a:hover, .sidebar a.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(5px);
+}
+
+/* Bouton de déconnexion */
+.logout-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+.logout-btn:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+}
+
+/* Contenu principal */
+.main {
+  margin-left: var(--sidebar-width);
+  padding: 2.5rem;
+  width: calc(100% - var(--sidebar-width));
+  min-height: 100vh;
+}
+
+.main h2 {
+  color: var(--secondary-color);
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.main p {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Tableau */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: white;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table th {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #eee;
+  vertical-align: middle;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #f1f7fd;
+}
+
+/* Boutons d'action */
+.btn-valider {
+  padding: 0.5rem 1rem;
+  background: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-valider:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* Badges de statut */
+td[data-status="En attente"] {
+  color: #f39c12;
+  font-weight: 500;
+}
+
+td[data-status="Validé"] {
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+td[data-status="Refusé"] {
+  color: var(--danger-color);
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 220px;
+    padding: 1.5rem 1rem;
+  }
+  
+  .main {
+    margin-left: 220px;
+    padding: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+table tr {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+table tr:nth-child(1) { animation-delay: 0.1s; }
+table tr:nth-child(2) { animation-delay: 0.2s; }
+table tr:nth-child(3) { animation-delay: 0.3s; }

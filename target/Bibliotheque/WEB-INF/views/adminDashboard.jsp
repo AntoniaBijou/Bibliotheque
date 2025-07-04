@@ -6,7 +6,7 @@
 
         <head>
             <title>Admin Dashboard</title>
-            <!-- <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet"> -->
+            <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet">
 
         </head>
 

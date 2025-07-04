@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Liste des Réservations</title>
+    <link href="${pageContext.request.contextPath}/assets/css/reservation.css" rel="stylesheet">
 </head>
 <body>
     <h2>Liste des Réservations</h2>

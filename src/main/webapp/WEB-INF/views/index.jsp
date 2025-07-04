@@ -2,25 +2,33 @@
 <html>
 <head>
     <title>Page de Connexion</title>
-    <!-- <link href="${pageContext.request.contextPath}/assets/css/index.css" rel="stylesheet"> -->
+    <link href="${pageContext.request.contextPath}/assets/css/index.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Connexion</h2>
-    <form action="${pageContext.request.contextPath}/index" method="post">
-        <label>Nom :</label>
-        <input type="text" name="nom" required /><br/>
+    <div class="login-container">
+        <h2 class="login-title">Connexion</h2>
+        <form class="login-card" action="${pageContext.request.contextPath}/index" method="post">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" class="form-control" required />
+            </div>
 
-        <label>Email :</label>
-        <input type="email" name="email" required /><br/>
+            <div class="form-group">
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" class="form-control" required />
+            </div>
 
-        <label>Mot de passe :</label>
-        <input type="password" name="password" required /><br/>
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" class="form-control" required />
+            </div>
 
-        <input type="submit" value="Se connecter" />
-    </form>
+            <button type="submit" class="btn">Se connecter</button>
+        </form>
 
-    <c:if test="${not empty erreur}">
-        <p style="color:red">${erreur}</p>
-    </c:if>
+        <c:if test="${not empty erreur}">
+            <p class="error-message">${erreur}</p>
+        </c:if>
+    </div>
 </body>
 </html>

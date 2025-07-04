@@ -1,0 +1,157 @@
+/* assets/css/admin.css */
+
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(91, 173, 254, 0.1) 0%, rgba(91, 173, 254, 0.1) 90%),
+        linear-gradient(to bottom, #f5f7fa, #e4e8eb);
+}
+
+/* Conteneur principal */
+body > h2 {
+    position: absolute;
+    top: 20%;
+    color: #2c3e50;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Formulaire admin */
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 450px;
+    margin: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(to bottom, #e74c3c, #3498db);
+}
+
+/* Champs de formulaire */
+form label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #34495e;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 1.8rem;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f9fbfd;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: white;
+}
+
+/* Bouton de connexion */
+form button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, #3498db, #2c3e50);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+form button[type="submit"]:hover {
+    background: linear-gradient(to right, #2980b9, #1a252f);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+}
+
+form button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* Message d'erreur */
+p[style*="color:red"] {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+    color: #c0392b !important;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    animation: shake 0.5s ease;
+    text-align: center;
+}
+
+/* Animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* Sécurité visuelle */
+.security-notice {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body > h2 {
+        top: 15%;
+        font-size: 1.8rem;
+    }
+    
+    form {
+        padding: 1.8rem;
+        margin: 1rem;
+    }
+}

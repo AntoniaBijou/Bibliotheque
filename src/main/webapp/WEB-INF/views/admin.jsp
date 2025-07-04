@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Login Admin</title>
+        <link href="${pageContext.request.contextPath}/assets/css/admin.css" rel="stylesheet">
+
 </head>
 <body>
     <h2>Connexion Admin</h2>

@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Réservation</title>
+    <link href="${pageContext.request.contextPath}/assets/css/formReservation.css" rel="stylesheet">
+
 </head>
 <body>
     <h2>Formulaire de réservation</h2>
