@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class Categorie {
     @Id
     @Column(name = "idCategorie", nullable = false)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCategorie;
 
     @Column(name = "nom", nullable = false, length = 50)

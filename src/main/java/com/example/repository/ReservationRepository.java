@@ -10,15 +10,7 @@ import com.example.projection.ReservationProjection;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Integer>{
 
-@Query(value = """
-    SELECT 
-        idReservation AS idReservation, 
-        nomAdherant AS nomAdherant, 
-        titreLivre AS titreLivre, 
-        dateReservation AS dateReservation, 
-        statut AS statut
-    FROM Vue_Reservations_Detaillees
-    """, nativeQuery = true)
-    List<ReservationProjection> getAllReservations();
+@Query(value = "SELECT idReservation AS idReservation, nomAdherant AS nomAdherant, titreLivre AS titreLivre, dateReservation AS dateReservation, statut AS statut FROM Vue_Reservations_Detaillees", nativeQuery = true)
+List<ReservationProjection> getAllReservations();
 
 }

@@ -5,7 +5,7 @@
 
         <head>
             <title>Page d'accueil</title>
-            <!-- <link href="${pageContext.request.contextPath}/assets/css/acceuil.css" rel="stylesheet"> -->
+            <link href="${pageContext.request.contextPath}/assets/css/acceuil.css" rel="stylesheet">
 
         </head>
 
@@ -14,11 +14,11 @@
             <div class="sidebar">
                 <h2>Menu</h2>
                 <a href="acceuil">Accueil</a>
-                <a href="reservations">Liste des livres réservés</a>
+                <a href="reservations">Liste des livres reserves</a>
                 <a href="admin">Admin</a>
 
                 <form class="logout-form" action="logout" method="post">
-                    <button type="submit">Se déconnecter</button>
+                    <button type="submit">Se deconnecter</button>
                 </form>
             </div>
 
@@ -44,7 +44,7 @@
                             <td>
                                 <form action="formReservation" method="get">
                                     <input type="hidden" name="idExemplaire" value="${livre.idExemplaire}" />
-                                    <button type="submit">Réserver</button>
+                                    <button type="submit">Reserver</button>
                                 </form>
 
                             </td>

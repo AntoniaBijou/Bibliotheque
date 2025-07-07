@@ -26,7 +26,9 @@ public class AdminReservationController {
 
         System.out.println("Nombre de réservations trouvées : " + reservations.size());
         for (ReservationProjection r : reservations) {
+            
             System.out.println("Reservation : " + r.getTitreLivre() + " par " + r.getNomAdherant());
+            
         }
 
         mav.addObject("reservations", reservations);
@@ -39,13 +41,12 @@ public class AdminReservationController {
         Optional<Reservation> optional = reservationRepository.findById(id);
         if (optional.isPresent()) {
             Reservation reservation = optional.get();
-            reservation.setStatut("Validée");
+            reservation.setStatut("Confirme");
             reservationRepository.save(reservation);
         }
         return "redirect:/admin/dashboard";
     }
 
-    // 🔸 Déconnexion simple
     @PostMapping("/logout")
     public String logout(javax.servlet.http.HttpSession session) {
         session.invalidate();
@@ -57,7 +58,7 @@ public ModelAndView validerReservation(@RequestParam("idReservation") int idRese
     Optional<Reservation> optional = reservationRepository.findById(idReservation);
     if (optional.isPresent()) {
         Reservation r = optional.get();
-        r.setStatut("confirme"); // ✅ PAS "Validée"
+        r.setStatut("confirme"); 
         reservationRepository.save(r);
     }
 
@@ -66,6 +67,4 @@ public ModelAndView validerReservation(@RequestParam("idReservation") int idRese
     mav.addObject("reservations", liste);
     return mav;
 }
-
-
 }

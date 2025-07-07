@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Prolongement {
     @Id
     @Column(name = "idProlongement", nullable = false)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idProlongement;
 
     @Column(name = "dateDemande", nullable = false, columnDefinition = "DATE")

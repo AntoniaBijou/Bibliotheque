@@ -1,13 +1,18 @@
 package com.example.controller;
 
 import com.example.model.Admin;
+import com.example.model.Exemplaire;
 import com.example.model.Pret;
+import com.example.repository.AdherantRepository;
+import com.example.repository.ExemplaireRepository;
+import com.example.repository.LivreRepository;
 import com.example.repository.PretRepository;
 import com.example.service.AdminService;
 import com.example.service.PretService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -58,6 +63,12 @@ public class AdminController {
     @Autowired
     private PretService pretService;
 
+    @Autowired
+    private AdherantRepository adherantRepository;
+
+    @Autowired
+    private ExemplaireRepository exemplaireRepository;
+
     @PostMapping("/admin/savePret")
     public ModelAndView enregistrerPret(
             @RequestParam("nomAdherant") String nomAdherant,
@@ -67,19 +78,38 @@ public class AdminController {
             @RequestParam("dateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetour,
             @RequestParam("status") String status) {
 
-        System.out.println("➡️ Formulaire reçu : " + nomAdherant + ", " + titreLivre);
-
-        boolean success = pretService.ajouterPret(nomAdherant, titreLivre, typePret, dateEmprunt, dateRetour, status);
-
-        if (!success) {
-            System.out.println("⚠️ Échec insertion : Adhérant ou livre introuvable");
+        // Conversion des noms en IDs
+        var adherant = adherantRepository.findByNom(nomAdherant);
+        if (adherant == null) {
             ModelAndView mav = new ModelAndView("formPret");
-            mav.addObject("erreur", "Adhérant ou livre introuvable.");
+            mav.addObject("erreur", "Adhérant non trouvé pour : " + nomAdherant);
             return mav;
         }
+        Integer idAdherant = adherant.getIdAdherant();
+        Optional<Exemplaire> exemplaireOpt = exemplaireRepository.findByLivreTitre(titreLivre);
+        if (exemplaireOpt.isEmpty()) {
+            ModelAndView mav = new ModelAndView("formPret");
+            mav.addObject("erreur", "Aucun exemplaire trouvé pour le titre : " + titreLivre);
+            return mav;
+        }
+        Integer idExemplaire = exemplaireOpt.get().getIdExemplaire();
 
-        System.out.println("✅ Prêt inséré avec succès !");
-        return new ModelAndView("redirect:/admin/dashboard");
+        boolean success = pretService.ajouterPret(
+                idAdherant, // Integer
+                idExemplaire, // Integer
+                typePret,
+                dateEmprunt,
+                dateRetour,
+                status);
+        if (!success) {
+            System.out.println("ÉCHEC - Raisons possibles:");
+            System.out.println("1. Adhérant non trouvé");
+            System.out.println("2. Exemplaire non trouvé");
+            System.out.println("3. Erreur de validation");
+        }
+
+        return new ModelAndView(success ? "redirect:/admin/dashboard" : "formPret")
+                .addObject("erreur", success ? null : "Échec de l'ajout du prêt");
     }
 
     @Autowired
@@ -92,5 +122,4 @@ public class AdminController {
         mav.addObject("prets", liste);
         return mav;
     }
-
 }

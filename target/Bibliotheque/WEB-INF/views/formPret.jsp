@@ -16,7 +16,7 @@
         <label>Type de prêt :</label>
         <select name="typePret">
             <option value="sur place">Sur place</option>
-            <option value="à domicile">À domicile</option>
+            <option value="a domicile">a domicile</option>
         </select><br/>
 
         <label>Date d'emprunt :</label>

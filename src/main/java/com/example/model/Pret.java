@@ -35,10 +35,10 @@ public class Pret {
     public Pret() {
     }
 
-    public Pret(Integer idPret, LocalDate dateEmprunt, LocalDate dateRetour,
+    // Modifiez le constructeur pour ne pas prendre l'ID
+    public Pret(LocalDate dateEmprunt, LocalDate dateRetour,
             String typePret, String status, Exemplaire exemplaire,
             Adherant adherant) {
-        this.idPret = idPret;
         this.dateEmprunt = dateEmprunt;
         this.dateRetour = dateRetour;
         this.typePret = typePret;

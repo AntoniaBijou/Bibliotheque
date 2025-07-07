@@ -6,7 +6,7 @@
 
         <head>
             <title>Admin Dashboard</title>
-            <!-- <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet"> -->
+            <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet">
 
         </head>
 
@@ -23,19 +23,19 @@
                     <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
                 </ul>
                 <form method="post" action="${pageContext.request.contextPath}/admin/logout">
-                    <button class="logout-btn">Se déconnecter</button>
+                    <button class="logout-btn">Se deconnecter</button>
                 </form>
             </div>
 
 
 
             <div class="main">
-                <h2>Liste de toutes les réservations</h2>
-                <p>Total réservations : ${fn:length(reservations)}</p>
+                <h2>Liste de toutes les reservations</h2>
+                <p>Total reservations : ${fn:length(reservations)}</p>
                 <table border="1">
                     <tr>
                         <th>ID</th>
-                        <th>Adhérant</th>
+                        <th>Adherant</th>
                         <th>Livre</th>
                         <th>Date</th>
                         <th>Statut</th>

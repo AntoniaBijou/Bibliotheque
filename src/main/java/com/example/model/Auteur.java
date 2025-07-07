@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Auteur {
     @Id
     @Column(name = "idAuteur", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAuteur;
 
     @Column(name = "nom", nullable = false, length = 50)

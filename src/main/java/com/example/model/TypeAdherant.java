@@ -9,6 +9,7 @@ import java.util.Set;
 public class TypeAdherant {
     @Id
     @Column(name = "idTypeAdherant", nullable = false)
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idTypeAdherant;
 
     @Column(name = "type", nullable = false, length = 50)

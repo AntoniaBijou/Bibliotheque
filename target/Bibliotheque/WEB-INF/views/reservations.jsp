@@ -1,18 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Liste des Réservations</title>
-    <!-- <link href="${pageContext.request.contextPath}/assets/css/reservation.css" rel="stylesheet"> -->
+    <title>Liste des Reservations</title>
+    <link href="${pageContext.request.contextPath}/assets/css/reservation.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Liste des Réservations</h2>
+    <h2>Liste des Reservations</h2>
 
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Adhérant</th>
+            <th>Adherant</th>
             <th>Livre</th>
-            <th>Date de réservation</th>
+            <th>Date de reservation</th>
             <th>Statut</th>
         </tr>
 

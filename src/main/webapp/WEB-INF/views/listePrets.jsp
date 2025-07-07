@@ -11,7 +11,7 @@
     <table border="1">
         <tr>
             <th>ID</th>
-            <th>Adhérant</th>
+            <th>Adherant</th>
             <th>Livre</th>
             <th>Date Emprunt</th>
             <th>Date Retour</th>

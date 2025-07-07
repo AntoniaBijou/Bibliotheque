@@ -1,6 +1,9 @@
 package com.example.service;
 
 import java.time.LocalDate;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,25 +27,41 @@ public class PretService {
     @Autowired
     private PretRepository pretRepository;
 
-    public boolean ajouterPret(String nomAdherant, String titreLivre, String typePret,
-                           LocalDate dateEmprunt, LocalDate dateRetour, String status) {
-    Adherant adherant = adherantRepository.findByNom(nomAdherant);
-    Exemplaire exemplaire = exemplaireRepository.findByLivreTitre(titreLivre); // méthode correcte
-
-    if (adherant != null && exemplaire != null) {
-        Pret pret = new Pret();
-        pret.setAdherant(adherant);        // attention : objet, pas ID
-        pret.setExemplaire(exemplaire);    // idem
-        pret.setTypePret(typePret);
-        
-        pret.setDateEmprunt(dateEmprunt);
-        pret.setDateRetour(dateRetour);
-        pret.setStatus(status);
-
-        pretRepository.save(pret); // ⛳ insertion ici
-        return true;
+@Transactional
+public boolean ajouterPret(Integer idAdherant, Integer idExemplaire, String typePret,
+                       LocalDate dateEmprunt, LocalDate dateRetour, String status) {
+    
+    // 1. Recherche des entités associées
+    Optional<Adherant> adherant = adherantRepository.findById(idAdherant);
+    Optional<Exemplaire> exemplaire = exemplaireRepository.findById(idExemplaire);
+    
+    // 2. Vérification de l'existence
+    if (!adherant.isPresent() || !exemplaire.isPresent()) {
+        return false;
     }
-    return false;
+    
+    // 3. Création et configuration du prêt
+    Pret pret = new Pret();
+    
+    // Setters obligatoires (champs NOT NULL)
+    pret.setAdherant(adherant.get());
+    pret.setExemplaire(exemplaire.get());
+    pret.setDateEmprunt(dateEmprunt);
+    pret.setDateRetour(dateRetour);
+    
+    // Setters pour les autres champs
+    pret.setTypePret(typePret);
+    pret.setStatus(status);
+    
+    // 4. Sauvegarde
+    pretRepository.save(pret);
+    
+    // 5. Log pour débogage
+    System.out.println("Prêt créé avec ID: " + pret.getIdPret() 
+        + " pour adhérent ID: " + idAdherant 
+        + " et exemplaire ID: " + idExemplaire);
+    
+    return true;
 }
 
 }
