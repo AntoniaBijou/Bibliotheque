@@ -35,7 +35,6 @@ public class AdminReservationController {
         return mav;
     }
 
-    // 🔸 Valider une réservation
     @PostMapping("/valider")
     public String validerReservation(@RequestParam("idReservation") Integer id) {
         Optional<Reservation> optional = reservationRepository.findById(id);

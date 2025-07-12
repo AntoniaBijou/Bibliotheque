@@ -6,19 +6,17 @@ import javax.persistence.*;
 @Table(name = "Exemplaire")
 public class Exemplaire {
     @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY) 
-@Column(name = "idExemplaire", nullable = false)
-private Integer idExemplaire;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idExemplaire", nullable = false)
+    private Integer idExemplaire;
 
     @Column(name = "nombre")
     private Integer nombre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idLivre", nullable = false)
     private Livre livre;
 
-    // Constructeurs
     public Exemplaire() {
     }
 
@@ -28,7 +26,6 @@ private Integer idExemplaire;
         this.livre = livre;
     }
 
-    // Getters et Setters
     public Integer getIdExemplaire() {
         return idExemplaire;
     }

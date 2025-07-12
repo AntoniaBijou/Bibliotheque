@@ -21,7 +21,6 @@ public class TypeAdherant {
     @OneToMany(mappedBy = "typeAdherant", fetch = FetchType.LAZY)
     private Set<Adherant> adherants = new HashSet<>();
 
-    // Constructeurs
     public TypeAdherant() {
     }
 
@@ -31,7 +30,6 @@ public class TypeAdherant {
         this.nombreQuota = nombreQuota;
     }
 
-    // Getters et Setters
     public Integer getIdTypeAdherant() {
         return idTypeAdherant;
     }
@@ -60,7 +58,6 @@ public class TypeAdherant {
         return adherants;
     }
 
-    // Méthodes utilitaires pour la relation bidirectionnelle
     public void addAdherant(Adherant adherant) {
         this.adherants.add(adherant);
         adherant.setTypeAdherant(this);

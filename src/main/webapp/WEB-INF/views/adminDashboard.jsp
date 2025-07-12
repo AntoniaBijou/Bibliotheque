@@ -19,7 +19,6 @@
                     <li><a href="${pageContext.request.contextPath}/admin/listePrets">Liste des prêts</a></li>
                     <li><a href="${pageContext.request.contextPath}/admin/formPret">Emprunt</a></li>
 
-                    <!-- ✅ Ajout -->
                     <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
                 </ul>
                 <form method="post" action="${pageContext.request.contextPath}/admin/logout">

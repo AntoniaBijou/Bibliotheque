@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "Livre")
 public class Livre {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 🟢 Ajoute cette ligne !
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idLivre", nullable = false)
     private Integer idLivre;
 
@@ -33,13 +33,11 @@ public class Livre {
     @OneToMany(mappedBy = "livre", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Exemplaire> exemplaires = new HashSet<>();
 
-    // Ajoutez cette collection dans la classe Livre
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "LivreCategorie", joinColumns = @JoinColumn(name = "idLivre"), inverseJoinColumns = @JoinColumn(name = "idCategorie"), uniqueConstraints = @UniqueConstraint(columnNames = {
             "idLivre", "idCategorie" }))
     private Set<Categorie> categories = new HashSet<>();
 
-    // Ajoutez le getter et setter
     public Set<Categorie> getCategories() {
         return categories;
     }
@@ -48,7 +46,6 @@ public class Livre {
         this.categories = categories;
     }
 
-    // Constructeurs
     public Livre() {
     }
 
@@ -61,7 +58,6 @@ public class Livre {
         this.auteur = auteur;
     }
 
-    // Getters et Setters
     public Integer getIdLivre() {
         return idLivre;
     }
@@ -110,7 +106,6 @@ public class Livre {
         this.auteur = auteur;
     }
 
-    // Ajoutez ces méthodes utilitaires
     public void addCategorie(Categorie categorie) {
         this.categories.add(categorie);
         categorie.getLivres().add(this);

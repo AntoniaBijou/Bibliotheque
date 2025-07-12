@@ -4,17 +4,16 @@ import com.example.model.Admin;
 import com.example.model.Exemplaire;
 import com.example.model.Pret;
 import com.example.repository.AdherantRepository;
-import com.example.repository.ExemplaireRepository;
-import com.example.repository.LivreRepository;
 import com.example.repository.PretRepository;
 import com.example.service.AdminService;
+import com.example.service.ExemplaireService;
 import com.example.service.PretService;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -52,7 +51,7 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String voirDashboard() {
-        return "adminDashboard"; // ta vue JSP adminDashboard.jsp
+        return "adminDashboard"; 
     }
 
     @GetMapping("/admin/formPret")
@@ -61,13 +60,16 @@ public class AdminController {
     }
 
     @Autowired
+    @Lazy
     private PretService pretService;
 
     @Autowired
+    @Lazy
     private AdherantRepository adherantRepository;
 
     @Autowired
-    private ExemplaireRepository exemplaireRepository;
+    @Lazy
+    private ExemplaireService exemplaireService;
 
     @PostMapping("/admin/savePret")
     public ModelAndView enregistrerPret(
@@ -78,25 +80,28 @@ public class AdminController {
             @RequestParam("dateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetour,
             @RequestParam("status") String status) {
 
-        // Conversion des noms en IDs
+        System.out.println(nomAdherant + " " + titreLivre + " " + typePret + " " + dateEmprunt.toString());
         var adherant = adherantRepository.findByNom(nomAdherant);
         if (adherant == null) {
             ModelAndView mav = new ModelAndView("formPret");
             mav.addObject("erreur", "Adhérant non trouvé pour : " + nomAdherant);
+            System.out.println("null adherant");
             return mav;
         }
         Integer idAdherant = adherant.getIdAdherant();
-        Optional<Exemplaire> exemplaireOpt = exemplaireRepository.findByLivreTitre(titreLivre);
-        if (exemplaireOpt.isEmpty()) {
+        Exemplaire exemplaireOpt = exemplaireService.getExemplaireByLivreTitre(titreLivre);
+        if (exemplaireOpt == null) {
             ModelAndView mav = new ModelAndView("formPret");
             mav.addObject("erreur", "Aucun exemplaire trouvé pour le titre : " + titreLivre);
+            System.out.println("empty");
             return mav;
         }
-        Integer idExemplaire = exemplaireOpt.get().getIdExemplaire();
+
+        Integer idExemplaire = exemplaireOpt.getIdExemplaire();
 
         boolean success = pretService.ajouterPret(
-                idAdherant, // Integer
-                idExemplaire, // Integer
+                idAdherant, 
+                idExemplaire,
                 typePret,
                 dateEmprunt,
                 dateRetour,
@@ -113,11 +118,15 @@ public class AdminController {
     }
 
     @Autowired
+    @Lazy
     private PretRepository pretRepository;
 
     @GetMapping("/admin/listePrets")
     public ModelAndView afficherListePrets() {
         List<Pret> liste = pretRepository.findAll();
+        for (Pret pret : liste) {
+            System.out.println(pret.getAdherant().getNom());
+        }
         ModelAndView mav = new ModelAndView("listePrets");
         mav.addObject("prets", liste);
         return mav;

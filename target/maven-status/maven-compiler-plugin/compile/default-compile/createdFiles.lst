@@ -24,3 +24,4 @@ com\example\model\Prolongement.class
 com\example\service\LivreService.class
 com\example\model\TypeAdherant.class
 com\example\repository\AdminRepository.class
+com\example\service\ExemplaireService.class

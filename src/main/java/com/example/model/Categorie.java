@@ -16,11 +16,9 @@ public class Categorie {
     @Column(name = "nom", nullable = false, length = 50)
     private String nom;
 
-    // Ajoutez cette collection dans la classe Categorie
     @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
     private Set<Livre> livres = new HashSet<>();
 
-    // Ajoutez le getter et setter
     public Set<Livre> getLivres() {
         return livres;
     }
@@ -29,7 +27,6 @@ public class Categorie {
         this.livres = livres;
     }
 
-    // Constructeurs
     public Categorie() {
     }
 
@@ -38,7 +35,6 @@ public class Categorie {
         this.nom = nom;
     }
 
-    // Getters et Setters
     public Integer getIdCategorie() {
         return idCategorie;
     }

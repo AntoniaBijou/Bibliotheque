@@ -23,19 +23,17 @@ public class Pret {
     @Column(name = "status", length = 50)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idExemplaire", nullable = false)
     private Exemplaire exemplaire;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idAdherant", nullable = false)
     private Adherant adherant;
 
-    // Constructeurs
     public Pret() {
     }
 
-    // Modifiez le constructeur pour ne pas prendre l'ID
     public Pret(LocalDate dateEmprunt, LocalDate dateRetour,
             String typePret, String status, Exemplaire exemplaire,
             Adherant adherant) {
@@ -47,7 +45,6 @@ public class Pret {
         this.adherant = adherant;
     }
 
-    // Getters et Setters
     public Integer getIdPret() {
         return idPret;
     }

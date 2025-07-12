@@ -27,7 +27,6 @@ public class Prolongement {
     @JoinColumn(name = "idPret", nullable = false)
     private Pret pret;
 
-    // Constructeurs
     public Prolongement() {
     }
 
@@ -42,7 +41,6 @@ public class Prolongement {
         this.pret = pret;
     }
 
-    // Getters et Setters
     public Integer getIdProlongement() {
         return idProlongement;
     }

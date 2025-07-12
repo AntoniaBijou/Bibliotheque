@@ -28,7 +28,6 @@ public class Adherant {
     @OneToMany(mappedBy = "adherant", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Pret> prets = new HashSet<>();
 
-    // Constructeurs
     public Adherant() {
     }
 
@@ -41,7 +40,6 @@ public class Adherant {
         this.typeAdherant = typeAdherant;
     }
 
-    // Getters et Setters
     public Integer getIdAdherant() {
         return idAdherant;
     }

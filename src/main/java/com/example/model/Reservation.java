@@ -17,36 +17,47 @@ public class Reservation {
 
     private int idAdherant;
     private int idExemplaire;
+
     public int getIdReservation() {
         return idReservation;
     }
+
     public void setIdReservation(int idReservation) {
         this.idReservation = idReservation;
     }
+
     public LocalDate getDateReservation() {
         return dateReservation;
     }
+
     public void setDateReservation(LocalDate dateReservation) {
         this.dateReservation = dateReservation;
     }
+
     public String getStatut() {
         return statut;
     }
+
     public void setStatut(String statut) {
         this.statut = statut;
     }
+
     public int getIdAdherant() {
         return idAdherant;
     }
+
     public void setIdAdherant(int idAdherant) {
         this.idAdherant = idAdherant;
     }
+
     public int getIdExemplaire() {
         return idExemplaire;
     }
+
     public void setIdExemplaire(int idExemplaire) {
         this.idExemplaire = idExemplaire;
     }
+
     public Reservation(int idReservation, LocalDate dateReservation, String statut, int idAdherant, int idExemplaire) {
         this.idReservation = idReservation;
         this.dateReservation = dateReservation;
@@ -54,9 +65,8 @@ public class Reservation {
         this.idAdherant = idAdherant;
         this.idExemplaire = idExemplaire;
     }
+
     public Reservation() {
     }
 
-    
-    // getters & setters
 }

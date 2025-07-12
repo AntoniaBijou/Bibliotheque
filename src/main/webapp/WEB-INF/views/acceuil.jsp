@@ -10,7 +10,6 @@
         </head>
 
         <body>
-            <!-- Sidebar -->
             <div class="sidebar">
                 <h2>Menu</h2>
                 <a href="acceuil">Accueil</a>
@@ -22,7 +21,6 @@
                 </form>
             </div>
 
-            <!-- Contenu principal -->
             <div class="content">
                 <h2>Liste des livres</h2>
                 <table border="1">

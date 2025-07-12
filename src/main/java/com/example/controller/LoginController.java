@@ -40,7 +40,7 @@ public class LoginController {
 
         if (adherant != null) {
             mav.setViewName("/acceuil");
-            mav.addObject("livres", livreService.getLivresDepuisVue()); // ✅ méthode correcte
+            mav.addObject("livres", livreService.getLivresDepuisVue());
         } else {
             mav.setViewName("/index");
             mav.addObject("erreur", "Identifiants incorrects.");

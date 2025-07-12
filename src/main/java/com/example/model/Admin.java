@@ -12,7 +12,6 @@ public class Admin {
     private String email;
     private String motDePasse;
 
-    // Getters et Setters
     public int getIdAdmin() {
         return idAdmin;
     }

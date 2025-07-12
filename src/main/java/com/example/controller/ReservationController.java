@@ -37,7 +37,6 @@ public class ReservationController {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
-    // 👉 Affichage du formulaire
     @GetMapping("/formReservation")
     public ModelAndView afficherFormulaireReservation(@RequestParam("idExemplaire") int idExemplaire) {
         ModelAndView mav = new ModelAndView("formReservation");
@@ -45,7 +44,6 @@ public class ReservationController {
         return mav;
     }
 
-    // 👉 Traitement du formulaire
     @PostMapping("/reserver")
     public ModelAndView enregistrerReservation(
             @RequestParam("dateReservation") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateReservation,
@@ -53,7 +51,6 @@ public class ReservationController {
             @RequestParam("nomAdherant") String nomAdherant,
             @RequestParam("idExemplaire") int idExemplaire) {
 
-        // 1️⃣ Récupérer l’adhérant via son nom
         Adherant adherant = adherantRepository.findByNom(nomAdherant);
         if (adherant == null) {
             ModelAndView mav = new ModelAndView("formReservation");
@@ -62,7 +59,6 @@ public class ReservationController {
             return mav;
         }
 
-        // 2️⃣ Insérer la réservation
         Reservation reservation = new Reservation();
         reservation.setDateReservation(dateReservation);
         reservation.setStatut(statut);
@@ -70,16 +66,14 @@ public class ReservationController {
         reservation.setIdExemplaire(idExemplaire);
         reservationRepository.save(reservation);
 
-        // 3️⃣ Diminuer le nombre d’exemplaires
         Optional<Exemplaire> optional = exemplaireRepository.findById(idExemplaire);
         if (optional.isPresent()) {
             Exemplaire ex = optional.get();
             int nouveauNombre = ex.getNombre() - 1;
-            ex.setNombre(Math.max(nouveauNombre, 0)); // évite négatif
+            ex.setNombre(Math.max(nouveauNombre, 0)); 
             exemplaireRepository.save(ex);
         }
 
-        // 4️⃣ Retour à la page d’accueil avec la liste à jour
         ModelAndView mav = new ModelAndView("acceuil");
         List<LivreVueProjection> livres = livreService.getLivresDepuisVue();
         mav.addObject("livres", livres);
