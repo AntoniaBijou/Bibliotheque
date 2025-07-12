@@ -23,7 +23,7 @@ public class Prolongement {
     @Column(name = "motif", length = 100)
     private String motif;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idPret", nullable = false)
     private Pret pret;
 
@@ -88,6 +88,7 @@ public class Prolongement {
     public void setPret(Pret pret) {
         this.pret = pret;
     }
+    
 
     @Override
     public String toString() {

@@ -18,6 +18,7 @@
                     <li><a href="${pageContext.request.contextPath}/admin/dashboard">Tableau de bord</a></li>
                     <li><a href="${pageContext.request.contextPath}/admin/listePrets">Liste des prêts</a></li>
                     <li><a href="${pageContext.request.contextPath}/admin/formPret">Emprunt</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/listeProlongements">Liste des prolongements</a></li>
 
                     <li><a href="${pageContext.request.contextPath}/">Accueil</a></li>
                 </ul>

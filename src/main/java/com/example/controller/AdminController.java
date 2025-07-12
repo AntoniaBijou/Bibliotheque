@@ -131,4 +131,5 @@ public class AdminController {
         mav.addObject("prets", liste);
         return mav;
     }
+
 }

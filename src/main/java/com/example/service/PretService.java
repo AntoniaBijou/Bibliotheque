@@ -68,4 +68,13 @@ public class PretService {
         return true;
     }
 
+    public Pret trouverParId(Integer idPret) {
+        Optional<Pret> pret = pretRepository.findById(idPret);
+        return pret.orElse(null);
+    }
+
+    public Pret enregistrerPret(Pret pret) {
+    return pretRepository.save(pret);
+}
+
 }

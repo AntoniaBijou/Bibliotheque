@@ -1,0 +1,17 @@
+Front office : 
+    --listes livres
+    --formulaires reservations
+    --formulaires prolongations
+    --listes reservation
+    --listes prolongations
+    listes prets avec une action bouton rendu 
+
+Back offices:
+    listes reservations avec actions valider
+    listes prolongations avec action boutons valider ou refuser
+    listes prets
+    formulaires prets
+
+Regles de gestions : 
+    Vao tara ny rendu ana livres de tokony merina exceptions 
+

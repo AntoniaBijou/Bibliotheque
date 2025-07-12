@@ -10,11 +10,11 @@
         </head>
 
         <body>
-            <!-- Sidebar -->
             <div class="sidebar">
                 <h2>Menu</h2>
                 <a href="acceuil">Accueil</a>
                 <a href="reservations">Liste des livres reserves</a>
+                <a href="listes_prets_adherant">Liste des livres pretes</a>
                 <a href="admin">Admin</a>
 
                 <form class="logout-form" action="logout" method="post">
@@ -22,7 +22,6 @@
                 </form>
             </div>
 
-            <!-- Contenu principal -->
             <div class="content">
                 <h2>Liste des livres</h2>
                 <table border="1">
