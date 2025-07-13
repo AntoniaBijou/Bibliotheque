@@ -1,232 +1,511 @@
-/* assets/css/adminDashboard.css */
-
-/* Reset et base */
+/* Variables */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2c3e50;
-  --danger-color: #e74c3c;
-  --success-color: #2ecc71;
-  --light-gray: #f5f7fa;
-  --dark-gray: #34495e;
-  --sidebar-width: 250px;
+    --primary: #2c3e50;
+    --primary-light: #3a516f;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --light: #f8f9fa;
+    --dark: #1a252f;
+    --text: #333;
+    --text-light: #7f8c8d;
+    --border: #e1e8ed;
+    --radius-md: 8px;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body {
-  background-color: var(--light-gray);
-  display: flex;
-  min-height: 100vh;
-  color: var(--secondary-color);
+/* Layout */
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f7fa;
 }
 
-/* Sidebar */
-.sidebar {
-  width: var(--sidebar-width);
-  background: var(--secondary-color);
-  color: white;
-  padding: 2rem 1.5rem;
-  height: 100vh;
-  position: fixed;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+.admin-sidebar {
+    width: 250px;
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
 }
 
-.sidebar h3 {
-  color: white;
-  margin-bottom: 2.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 1.5rem;
-  text-align: center;
+.admin-main {
+    flex: 1;
+    padding: var(--space-lg);
+    overflow-x: auto;
 }
 
-.sidebar ul {
-  list-style: none;
-  flex-grow: 1;
+/* Sidebar Styles */
+.sidebar-header {
+    padding: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.sidebar li {
-  margin-bottom: 0.8rem;
+.sidebar-header i {
+    font-size: 1.5rem;
 }
 
-.sidebar a {
-  display: block;
-  color: #bdc3c7;
-  padding: 0.8rem 1rem;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-  font-weight: 500;
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
 }
 
-.sidebar a:hover, .sidebar a.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  transform: translateX(5px);
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-lg) 0;
+    flex-grow: 1;
 }
 
-/* Bouton de déconnexion */
+.sidebar-menu li a {
+    display: flex;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+    gap: var(--space-md);
+}
+
+.sidebar-menu li a:hover {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.sidebar-menu li.active a {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.sidebar-menu i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    padding: var(--space-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .logout-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background: var(--danger-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-weight: 500;
-  margin-top: auto;
+    width: 100%;
+    padding: var(--space-md);
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    transition: all 0.3s;
 }
 
 .logout-btn:hover {
-  background: #c0392b;
-  transform: translateY(-2px);
+    background-color: #c0392b;
 }
 
-/* Contenu principal */
-.main {
-  margin-left: var(--sidebar-width);
-  padding: 2.5rem;
-  width: calc(100% - var(--sidebar-width));
-  min-height: 100vh;
+/* Main Content Styles */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
 }
 
-.main h2 {
-  color: var(--secondary-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.8rem;
+.main-header h2 {
+    color: var(--primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
 }
 
-.main p {
-  color: #7f8c8d;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
+.stats-card {
+    background-color: white;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
 }
 
-/* Tableau */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-  background: white;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  overflow: hidden;
+.stats-card i {
+    color: var(--secondary);
 }
 
-table th {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem 1.2rem;
-  text-align: left;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
+/* Table Styles */
+.table-container {
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
-table td {
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid #eee;
-  vertical-align: middle;
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-table tr:last-child td {
-  border-bottom: none;
+.admin-table thead {
+    background-color: var(--primary);
+    color: white;
 }
 
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+.admin-table th {
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 500;
 }
 
-table tr:hover {
-  background-color: #f1f7fd;
+.admin-table tbody tr {
+    border-bottom: 1px solid var(--border);
 }
 
-/* Boutons d'action */
-.btn-valider {
-  padding: 0.5rem 1rem;
-  background: var(--success-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-weight: 500;
-  font-size: 0.9rem;
+.admin-table tbody tr:last-child {
+    border-bottom: none;
 }
 
-.btn-valider:hover {
-  background: #27ae60;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+.admin-table td {
+    padding: var(--space-md);
+    color: var(--text);
 }
 
-/* Badges de statut */
-td[data-status="En attente"] {
-  color: #f39c12;
-  font-weight: 500;
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
 }
 
-td[data-status="Validé"] {
-  color: var(--success-color);
-  font-weight: 500;
+.status-badge.en-attente {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--warning);
 }
 
-td[data-status="Refusé"] {
-  color: var(--danger-color);
-  font-weight: 500;
+.status-badge.Confirme {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+}
+
+.status-badge.annulee {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent);
+}
+
+/* Action Buttons */
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.validate-btn {
+    background-color: var(--success);
+    color: white;
+}
+
+.validate-btn:hover {
+    background-color: #27ae60;
 }
 
 /* Responsive */
 @media (max-width: 992px) {
-  .sidebar {
-    width: 220px;
-    padding: 1.5rem 1rem;
-  }
-  
-  .main {
-    margin-left: 220px;
-    padding: 1.8rem;
-  }
+    .admin-sidebar {
+        width: 70px;
+    }
+    
+    .sidebar-header h3, 
+    .sidebar-menu li a span {
+        display: none;
+    }
+    
+    .sidebar-menu li a {
+        justify-content: center;
+    }
+    
+    .logout-btn span {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  
-  .main {
-    margin-left: 0;
-    width: 100%;
-  }
-  
-  table {
-    display: block;
-    overflow-x: auto;
-  }
+    .admin-container {
+        flex-direction: column;
+    }
+    
+    .admin-sidebar {
+        width: 100%;
+        flex-direction: row;
+        padding: var(--space-md);
+    }
+    
+    .sidebar-header, 
+    .sidebar-footer {
+        display: none;
+    }
+    
+    .sidebar-menu {
+        display: flex;
+        margin: 0;
+        gap: var(--space-md);
+    }
+    
+    .sidebar-menu li a {
+        padding: var(--space-sm);
+    }
+    
+    .admin-main {
+        padding: var(--space-md);
+    }
+    
+    .table-container {
+        overflow-x: auto;
+    }
+}
+----------------------LISTES PRETS----------------------------
+/* Styles spécifiques pour la liste des prêts */
+.stats-card {
+    background-color: white;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.stats-card i {
+    color: var(--secondary);
 }
 
-table tr {
-  animation: fadeIn 0.4s ease forwards;
+/* Badges de statut supplémentaires */
+.status-badge.en-cours {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--secondary);
 }
 
-table tr:nth-child(1) { animation-delay: 0.1s; }
-table tr:nth-child(2) { animation-delay: 0.2s; }
-table tr:nth-child(3) { animation-delay: 0.3s; }
+.status-badge.en-retard {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent);
+}
+
+.status-badge.rendu {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+}
+
+/* Adaptation responsive du tableau */
+@media (max-width: 768px) {
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .admin-table {
+        min-width: 600px;
+    }
+}
+
+/* --------------------FORMULAIRE PRETS---------------------------------- */
+/* Form Styles */
+.form-container {
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: var(--space-lg);
+}
+
+.form-title {
+    color: var(--primary);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.form-row {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.form-label i {
+    color: var(--secondary);
+    width: 20px;
+    text-align: center;
+}
+
+.form-input, .form-select {
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-input:focus, .form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+.form-actions {
+    margin-top: var(--space-lg);
+    text-align: right;
+}
+
+.submit-btn {
+    background-color: var(--success);
+    color: white;
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.submit-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+    
+    .form-container {
+        padding: var(--space-md);
+    }
+}
+
+/* -----------------------LISTES PROLONGEMENTS------------------------------- */
+
+/* Styles spécifiques pour les prolongements */
+.status-badge.en-attente {
+    background-color: rgba(243, 156, 18, 0.1);
+    color: var(--warning);
+}
+
+.status-badge.en-cours {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+}
+
+.status-badge.refuse {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: var(--accent);
+}
+
+.actions-cell {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.validate-btn {
+    background-color: var(--success);
+    color: white;
+}
+
+.cancel-btn {
+    background-color: var(--accent);
+    color: white;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.status-success {
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-error {
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Responsive pour les actions */
+@media (max-width: 768px) {
+    .actions-cell {
+        flex-direction: column;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

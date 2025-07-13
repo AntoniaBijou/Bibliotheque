@@ -1,23 +1,75 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Demande de Prolongement</title>
+    <link href="${pageContext.request.contextPath}/assets/css/nav_bar.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/clientForms.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Demande de prolongement</h2>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fas fa-book-open"></i>
+            <span>Bibliotheque Universitaire</span>
+        </div>
 
-<form action="${pageContext.request.contextPath}/prolongement/enregistrer" method="post">
-    <input type="hidden" name="idPret" value="${prolongement.pret.idPret}" />
+        <div class="navbar-links">
+            <a href="acceuil" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>Accueil</span>
+            </a>
+            <a href="reservations" class="nav-link">
+                <i class="fas fa-bookmark"></i>
+                <span>Reservations</span>
+            </a>
+            <a href="listes_prets_adherant" class="nav-link active">
+                <i class="fas fa-book"></i>
+                <span>Prets en cours</span>
+            </a>
+            <a href="admin" class="nav-link">
+                <i class="fas fa-user-shield"></i>
+                <span>Admin</span>
+            </a>
+        </div>
 
-    <label>Motif :</label><br>
-    <textarea name="motif" rows="4" cols="50" required></textarea><br><br>
+        <div class="navbar-actions">
+            <form class="logout-form" action="logout" method="post">
+                <button type="submit" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Deconnexion</span>
+                </button>
+            </form>
+        </div>
+    </nav>
 
-    <label>Nouvelle date de retour :</label><br>
-    <input type="date" name="nouvelleDateRetour" required/><br><br>
-
-    <button type="submit">Soumettre</button>
-</form>
-
+    <div class="form-container">
+        <h2 class="form-title"><i class="fas fa-calendar-plus"></i> Demande de prolongement</h2>
+        
+        <form class="client-form" action="${pageContext.request.contextPath}/prolongement/enregistrer" method="post">
+            <input type="hidden" name="idPret" value="${prolongement.pret.idPret}" />
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-comment"></i> Motif
+                </label>
+                <textarea name="motif" rows="5" class="form-input" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <i class="fas fa-calendar-day"></i> Nouvelle date de retour
+                </label>
+                <input type="date" name="nouvelleDateRetour" class="form-input" required>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Soumettre la demande
+                </button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

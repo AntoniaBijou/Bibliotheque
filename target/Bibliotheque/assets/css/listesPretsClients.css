@@ -1,0 +1,244 @@
+/* Variables */
+:root {
+    --primary: #2c3e50;
+    --primary-light: #3a516f;
+    --secondary: #3498db;
+    --accent: #e74c3c;
+    --success: #2ecc71;
+    --warning: #f39c12;
+    --light: #f8f9fa;
+    --dark: #1a252f;
+    --text: #333;
+    --text-light: #7f8c8d;
+    --border: #e1e8ed;
+    --radius-md: 8px;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+}
+
+/* Conteneur principal */
+.prets-container {
+    max-width: 1200px;
+    margin: var(--space-lg) auto;
+    padding: var(--space-lg);
+}
+
+.page-title {
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary);
+}
+
+.success-message {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--success);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    border: 1px solid var(--success);
+}
+
+.success-message i {
+    font-size: 1.2rem;
+}
+
+/* Grille des prêts */
+.prets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+}
+
+/* Carte de prêt */
+.pret-card {
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border-top: 4px solid;
+}
+
+.pret-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+/* Couleurs selon le statut */
+.pret-card.en-cours {
+    border-color: var(--secondary);
+}
+
+.pret-card.rendu {
+    border-color: var(--success);
+}
+
+.pret-card.en-retard {
+    border-color: var(--accent);
+}
+
+.pret-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background-color: var(--light);
+    border-bottom: 1px solid var(--border);
+}
+
+.pret-id {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.pret-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.pret-card.en-cours .pret-status {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.pret-card.rendu .pret-status {
+    background-color: var(--success);
+    color: white;
+}
+
+.pret-card.en-retard .pret-status {
+    background-color: var(--accent);
+    color: white;
+}
+
+.pret-body {
+    padding: var(--space-lg);
+}
+
+.pret-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    color: var(--text);
+}
+
+.pret-info i {
+    width: 24px;
+    color: var(--secondary);
+    margin-right: var(--space-md);
+}
+
+.pret-dates {
+    display: flex;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.date-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+}
+
+.date-group i {
+    color: var(--primary-light);
+    font-size: 1.2rem;
+}
+
+.date-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.date-value {
+    font-weight: 500;
+}
+
+.pret-type {
+    display: flex;
+    align-items: center;
+    margin-top: var(--space-md);
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.pret-type i {
+    margin-right: var(--space-sm);
+    color: var(--warning);
+}
+
+.pret-actions {
+    padding: 0 var(--space-lg) var(--space-lg);
+    display: flex;
+    gap: var(--space-md);
+}
+
+.action-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.return-btn {
+    background-color: var(--accent);
+    color: white;
+}
+
+.extend-btn {
+    background-color: var(--success);
+    color: white;
+}
+
+.disabled {
+    background-color: var(--border);
+    color: var(--text-light);
+    cursor: not-allowed;
+}
+
+.action-btn:hover:not(.disabled) {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .prets-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pret-dates {
+        flex-direction: column;
+    }
+}

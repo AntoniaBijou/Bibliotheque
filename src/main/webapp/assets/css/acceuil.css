@@ -1,174 +1,152 @@
-/* assets/css/acceuil.css */
-
-/* Reset et styles de base */
-* {
-    margin: 0;
+/* ===== VARIABLES ===== */
+:root {
+    /* Couleurs (reprises de index.css) */
+    --primary: #2c3e50;
+    --primary-light: #3a516f;
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --light-color: #f8f9fa;
+    --dark-color: #1a252f;
+    --text-color: #333;
+    --text-light: #7f8c8d;
+    --border-color: #e1e8ed;
+    
+    /* Espacements */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    
+    /* Bordures */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    
+    /* Ombres */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.2);
+}
+*{
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body {
-    background-color: #f8f9fa;
+/* Styles pour le contenu principal */
+.content-title {
+    color: var(--primary-color);
+    margin-bottom: var(--space-xl);
+    font-size: 1.8rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: var(--space-md);
+}
+
+.content-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Conteneur des livres */
+.livres-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-xl);
+    padding: var(--space-md) 0;
+}
+
+/* Carte de livre */
+.livre-card {
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: all 0.3s ease;
     display: flex;
-    min-height: 100vh;
-    color: #333;
+    flex-direction: column;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background: #2c3e50;
-    color: white;
-    padding: 20px;
-    height: 100vh;
-    position: fixed;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s;
+.livre-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
 }
 
-.sidebar h2 {
-    color: #ecf0f1;
-    margin-bottom: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.livre-header {
+    padding: var(--space-lg);
+    color: var(--text-color);
+}
+
+.livre-titre {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+.livre-auteur {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    display: block;
+    margin-top: var(--space-sm);
+}
+
+.livre-details {
+    padding: var(--space-lg);
+    flex-grow: 1;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-md);
+    color: var(--text-color);
+}
+
+.detail-item i {
+    margin-right: var(--space-sm);
+    color: var(--secondary-color);
+    width: 20px;
     text-align: center;
 }
 
-.sidebar a {
-    display: block;
-    color: #bdc3c7;
-    padding: 12px 15px;
-    margin-bottom: 8px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: all 0.3s;
+.livre-actions {
+    padding: 0 var(--space-lg) var(--space-lg);
 }
 
-.sidebar a:hover {
-    background: #34495e;
-    color: white;
-    transform: translateX(5px);
-}
-
-.sidebar a.active {
-    background: #3498db;
-    color: white;
-}
-
-/* Formulaire de déconnexion */
-.logout-form {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logout-form button {
-    width: 100%;
-    padding: 10px;
-    background: #e74c3c;
+.reserver-btn {
+    width: 90%;
+    height: 45px;
+    padding: var(--space-md);
+    background-color: var(--secondary-color);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logout-form button:hover {
-    background: #c0392b;
+.reserver-btn i {
+    margin-right: var(--space-sm);
 }
 
-/* Contenu principal */
-.content {
-    margin-left: 250px;
-    padding: 30px;
-    width: calc(100% - 250px);
-    background: white;
-    min-height: 100vh;
-}
-
-.content h2 {
-    color: #2c3e50;
-    margin-bottom: 25px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-/* Tableau */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-table th {
-    background-color: #3498db;
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-}
-
-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-}
-
-table tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-table tr:hover {
-    background-color: #f1f7fd;
-}
-
-/* Boutons */
-button, .btn {
-    padding: 8px 15px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-button:hover, .btn:hover {
-    background: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.reserver-btn:hover {
+    background-color: var(--primary-light);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
-    
-    .content {
-        margin-left: 0;
-        width: 100%;
-    }
-    
-    table {
-        display: block;
-        overflow-x: auto;
+    .livres-container {
+        grid-template-columns: 1fr;
     }
 }
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-table tr {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-table tr:nth-child(1) { animation-delay: 0.1s; }
-table tr:nth-child(2) { animation-delay: 0.2s; }
-table tr:nth-child(3) { animation-delay: 0.3s; }
-/* ... ajoutez plus si nécessaire */

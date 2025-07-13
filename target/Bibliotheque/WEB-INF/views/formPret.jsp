@@ -2,36 +2,116 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Formulaire de prêt</title>
+    <title>Formulaire de pret - Admin</title>
+    <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <h2>Ajouter un nouveau prêt</h2>
-    <form action="${pageContext.request.contextPath}/admin/savePret" method="post">
-        <label>Nom de l'adhérant :</label>
-        <input type="text" name="nomAdherant" required /><br/>
+    <div class="admin-container">
+        <div class="admin-sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>Espace Admin</h3>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/listePrets">
+                        <i class="fas fa-book"></i>
+                        <span>Liste des prets</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/admin/formPret">
+                        <i class="fas fa-hand-holding"></i>
+                        <span>Nouvel emprunt</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/listeProlongements">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Prolongements</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <form method="post" action="${pageContext.request.contextPath}/admin/logout" class="sidebar-footer">
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Deconnexion</span>
+                </button>
+            </form>
+        </div>
 
-        <label>Titre du livre :</label>
-        <input type="text" name="titreLivre" required /><br/>
-
-        <label>Type de prêt :</label>
-        <select name="typePret">
-            <option value="sur place">Sur place</option>
-            <option value="a domicile">a domicile</option>
-        </select><br/>
-
-        <label>Date d'emprunt :</label>
-        <input type="date" name="dateEmprunt" required /><br/>
-
-        <label>Date de retour :</label>
-        <input type="date" name="dateRetour" required /><br/>
-
-        <label>Statut :</label>
-        <select name="status">
-            <option value="en cours">En cours</option>
-            <option value="retourné">Retourné</option>
-        </select><br/>
-
-        <button type="submit">Valider le prêt</button>
-    </form>
+        <div class="admin-main">
+            <div class="form-container">
+                <h2 class="form-title"><i class="fas fa-hand-holding"></i> Nouveau pret</h2>
+                
+                <form class="admin-form" action="${pageContext.request.contextPath}/admin/savePret" method="post">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user"></i> Nom de l'adherent
+                        </label>
+                        <input type="text" name="nomAdherant" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-book"></i> Titre du livre
+                        </label>
+                        <input type="text" name="titreLivre" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-tag"></i> Type de pret
+                        </label>
+                        <select name="typePret" class="form-select">
+                            <option value="sur place">Sur place</option>
+                            <option value="a domicile">À domicile</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-calendar-check"></i> Date d'emprunt
+                            </label>
+                            <input type="date" name="dateEmprunt" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-calendar-times"></i> Date de retour
+                            </label>
+                            <input type="date" name="dateRetour" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-info-circle"></i> Statut
+                        </label>
+                        <select name="status" class="form-select">
+                            <option value="en cours">En cours</option>
+                            <option value="retourne">Retourne</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-check"></i> Valider le pret
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -104,3 +104,5 @@ CREATE TABLE Admin(
    motDePasse VARCHAR(50),
    PRIMARY KEY(idAdmin)
 );
+
+
