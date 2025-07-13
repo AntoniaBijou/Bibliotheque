@@ -10,6 +10,12 @@
     <body>
 
         <h2>Liste de tous les prêts</h2>
+        <c:if test="${not empty message}">
+            <div style="color: green; font-weight: bold; margin-bottom: 10px;">
+                ${message}
+            </div>
+        </c:if>
+
         <table border="1">
             <tr>
                 <th>ID</th>
@@ -31,10 +37,19 @@
                     <td>${pret.typePret}</td>
                     <td>${pret.status}</td>
                     <td>
-                        <button type="button">rendre</button>
-                        <a href="${pageContext.request.contextPath}/prolongement/demande/${pret.idPret}">
-                            <button type="button">Prolonger</button>
-                        </a>
+                        <c:choose>
+                            <c:when test="${pret.status == 'rendu'}">
+                                <button type="button">Livre rendu</button>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/pret/rendre/${pret.idPret}">
+                                    <button type="button">Rendre</button>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/prolongement/demande/${pret.idPret}">
+                                    <button type="button">Prolonger</button>
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
                     </td>
                 </tr>
             </c:forEach>

@@ -28,7 +28,10 @@ public class ExemplaireService {
             return null;
         }
         return exemplaires.get(0);
+    }
 
+    public void enregistrer(Exemplaire exemplaire) {
+        exemplaireRepository.save(exemplaire);
     }
 
 }

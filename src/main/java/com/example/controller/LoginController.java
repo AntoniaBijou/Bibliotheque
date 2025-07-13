@@ -33,6 +33,7 @@ public class LoginController {
         return "/index";
     }
 
+
     @PostMapping("/index")
     public ModelAndView traiterLogin(@RequestParam("nom") String nom,
             @RequestParam("email") String email,
@@ -50,17 +51,16 @@ public class LoginController {
 
         return mav;
     }
-      @GetMapping("/acceuil")
-    public String Acceuil() {
-        return "/acceuil"; 
+    @GetMapping("/acceuil")
+    public ModelAndView Acceuil() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("livres", livreService.getLivresDepuisVue());
+        return mav;
     }
 
     @Autowired
     @Lazy
     private PretRepository pretRepository;
-
-
-    
 
     @PostMapping("/logout")
     public String seDeconnecter(HttpSession session) {
