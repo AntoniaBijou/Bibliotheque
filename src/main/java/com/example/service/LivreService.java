@@ -43,10 +43,10 @@ public class LivreService {
     }
 
     public int getTotalExemplaires(Livre livre) {
-        return livre.getExemplaires()
+        return (livre.getExemplaires()
                     .stream()
                     .mapToInt(ex -> ex.getNombre() != null ? ex.getNombre() : 0)
-                    .sum();
+                    .sum())/2;
     }
 
     public List<LivreDTO> getLivresDTO() {
