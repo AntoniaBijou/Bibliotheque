@@ -6,11 +6,53 @@
     <title>Liste des prets - Admin</title>
     <link href="${pageContext.request.contextPath}/assets/css/adminDashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 5px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .voir_details {
+                    padding: 5px 7px;
+                    height: 30px;
+                    width: auto;
+                    border-radius: 10px;
+                    border: none;
+                    background-color: #e74c3c;
+                    color: #f8f9fa;
+                }
+    </style>
 </head>
 
 <body>
     <div class="admin-container">
-        <!-- Sidebar -->
         <div class="admin-sidebar">
             <div class="sidebar-header">
                 <i class="fas fa-user-shield"></i>
@@ -52,7 +94,6 @@
             </form>
         </div>
 
-        <!-- Main Content -->
         <div class="admin-main">
             <div class="main-header">
                 <h2><i class="fas fa-book"></i> Liste des prets</h2>
@@ -73,6 +114,7 @@
                             <th>Date Retour</th>
                             <th>Type</th>
                             <th>Statut</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,6 +131,12 @@
                                         ${pret.status}
                                     </span>
                                 </td>
+                                <td>
+                                    <a href="#" class="info-btn" data-id="${pret.adherant.idAdherant}">
+                                        <button type="button" class="voir_details"><i class="fas fa-info-circle"></i> Voir info</button>
+                                        
+                                    </a>
+                                </td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -96,5 +144,57 @@
             </div>
         </div>
     </div>
+
+    <div id="adherantModal" class="modal">
+        <div class="modal-content">
+            <span class="close"><i class="fas fa-times"></i></span>
+            <h2>Informations de l'adherent</h2>
+            <p><strong>Nom :</strong> <span id="adherantNom"></span></p>
+            <p><strong>Type :</strong> <span id="adherantType"></span></p>
+            <p><strong>Nombre Quota :</strong> <span id="adherantQuota"></span></p>
+            <p><strong>Date debut d'abonnement:</strong> <span id="abonnementDateDebut"></span></p>
+            <p><strong>Date fin d'abonnement:</strong> <span id="abonnementDateFin"></span></p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.info-btn').click(function(e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '${pageContext.request.contextPath}/api/adherant/' + id + '/abonnements',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data && data.length > 0) {
+                            var abonnement = data[0];
+                            $('#adherantNom').text(abonnement.nomAdherant);
+                            $('#adherantType').text(abonnement.typeAdherant);
+                            $('#adherantQuota').text(abonnement.nombreQuota);
+                            $('#abonnementDateDebut').text(new Date(abonnement.dateDebut).toLocaleDateString());
+                            $('#abonnementDateFin').text(new Date(abonnement.dateFin).toLocaleDateString());
+                            $('#adherantModal').show();
+                        } else {
+                            alert('Aucun abonnement trouve pour cet adherent.');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Erreur lors de la recuperation des details : ' + xhr.responseText);
+                    }
+                });
+            });
+
+            $('.close').click(function() {
+                $('#adherantModal').hide();
+            });
+
+            $(window).click(function(event) {
+                if (event.target == $('#adherantModal')[0]) {
+                    $('#adherantModal').hide();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

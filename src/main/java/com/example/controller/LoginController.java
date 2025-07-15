@@ -68,5 +68,4 @@ public class LoginController {
         session.invalidate(); 
         return "redirect:/index";
     }
-
 }

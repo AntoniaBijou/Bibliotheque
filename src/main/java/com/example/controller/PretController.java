@@ -16,7 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.model.Exemplaire;
 import com.example.model.Pret;
 import com.example.repository.PretRepository;
-import com.example.service.*;
+import com.example.service.ExemplaireService;
+import com.example.service.PretService;
 
 @Controller
 public class PretController {
@@ -24,6 +25,14 @@ public class PretController {
     @Autowired
     @Lazy
     private PretRepository pretRepository;
+
+    @Autowired
+    @Lazy
+    private PretService pretService;
+
+    @Autowired
+    @Lazy
+    private ExemplaireService exemplaireService;
 
     @GetMapping("/listes_prets_adherant")
     public ModelAndView afficherListePretsAdherants() {
@@ -35,14 +44,6 @@ public class PretController {
         mav.addObject("prets", liste);
         return mav;
     }
-
-    @Autowired
-    @Lazy
-    private PretService pretService;
-
-    @Autowired
-    @Lazy
-    private ExemplaireService exemplaireService;
 
     @GetMapping("/pret/rendre/{idPret}")
     public ModelAndView afficherFormulaireRendu(@PathVariable("idPret") Integer idPret) {
@@ -62,9 +63,9 @@ public class PretController {
         LocalDate dateRetourPrevue = pret.getDateRetour();
 
         if (dateRetourEffective.isAfter(dateRetourPrevue)) {
-            redirectAttributes.addFlashAttribute("message", " Sanction : retour en retard !");
+            redirectAttributes.addFlashAttribute("message", "Sanction : retour en retard !");
         } else {
-            redirectAttributes.addFlashAttribute("message", " Livre rendu avec succès !");
+            redirectAttributes.addFlashAttribute("message", "Livre rendu avec succès !");
         }
 
         pret.setStatus("rendu");
@@ -76,5 +77,4 @@ public class PretController {
 
         return "redirect:/listes_prets_adherant";
     }
-
 }

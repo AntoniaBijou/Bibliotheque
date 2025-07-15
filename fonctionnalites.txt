@@ -15,3 +15,13 @@ Back offices:
 Regles de gestions : 
     Vao tara ny rendu ana livres de tokony hamerina exceptions : sactions 
 
+Alea : 
+par adherant : 
+maka ny listes abonnements : misy date debut sy date fin : condition : tokony tsy afaka manao pret ilay olona raha tsy abonné tsony
+listes sanctions anleh olona 
+nombre quota : par types adherant 
+
+requette maka ny nombre quota par type adherant 
+manambotra table vaovao : abonnements
+
+

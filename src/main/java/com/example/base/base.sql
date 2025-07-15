@@ -99,3 +99,12 @@ CREATE TABLE Admin(
    motDePasse VARCHAR(50),
    PRIMARY KEY(idAdmin)
 );
+
+CREATE TABLE Abonnement (
+    idAbonnement INT AUTO_INCREMENT,
+    dateDebut DATE NOT NULL,
+    dateFin DATE NOT NULL,
+    idAdherant INT NOT NULL,
+    PRIMARY KEY(idAbonnement),
+    FOREIGN KEY(idAdherant) REFERENCES Adherant(idAdherant)
+);

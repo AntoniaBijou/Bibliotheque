@@ -42,7 +42,6 @@ public class LivreApiController {
                     .map(categorie -> categorie.getNom())
                     .collect(Collectors.toList())
             );
-
             LOG.info("Détails du livre récupérés avec succès pour idExemplaire : {}", id);
             return ResponseEntity.ok(livreDTO);
         } catch (Exception e) {

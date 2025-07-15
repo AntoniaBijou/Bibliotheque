@@ -12,11 +12,14 @@ com\example\controller\AdminReservationController.class
 com\example\repository\LivreRepository.class
 com\example\model\Auteur.class
 com\example\model\Pret.class
+com\example\repository\AbonnementRepository.class
 com\example\controller\LivreApiController.class
 com\example\repository\PretRepository.class
 com\example\service\ProlongementService.class
 com\example\controller\AdminProlongementController.class
+com\example\dto\AdherantAbonnementDTO.class
 com\example\controller\PretController.class
+com\example\controller\AdherantApiController.class
 com\example\projection\LivreVueProjection.class
 com\example\model\Categorie.class
 com\example\model\Reservation.class
@@ -27,8 +30,10 @@ com\example\service\AdminService.class
 com\example\service\AdherantService.class
 com\example\model\Prolongement.class
 com\example\repository\ProlongementRepository.class
+com\example\model\Abonnement.class
 com\example\service\LivreService.class
 com\example\model\TypeAdherant.class
+com\example\service\AbonnementService.class
 com\example\repository\AdminRepository.class
 com\example\dto\LivreDTO.class
 com\example\service\ExemplaireService.class

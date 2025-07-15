@@ -23,14 +23,10 @@ public class AdminReservationController {
     public ModelAndView afficherDashboardAdmin() {
         ModelAndView mav = new ModelAndView("adminDashboard");
         List<ReservationProjection> reservations = reservationRepository.getAllReservations();
-
         System.out.println("Nombre de réservations trouvées : " + reservations.size());
         for (ReservationProjection r : reservations) {
-
             System.out.println("Reservation : " + r.getTitreLivre() + " par " + r.getNomAdherant());
-
         }
-
         mav.addObject("reservations", reservations);
         return mav;
     }
@@ -46,12 +42,6 @@ public class AdminReservationController {
         return "redirect:/admin/dashboard";
     }
 
-    @PostMapping("/logout")
-    public String logout(javax.servlet.http.HttpSession session) {
-        session.invalidate();
-        return "redirect:/admin";
-    }
-
     @PostMapping("/admin/valider")
     public ModelAndView validerReservation(@RequestParam("idReservation") int idReservation) {
         Optional<Reservation> optional = reservationRepository.findById(idReservation);
@@ -60,7 +50,6 @@ public class AdminReservationController {
             r.setStatut("confirme");
             reservationRepository.save(r);
         }
-
         List<ReservationProjection> liste = reservationRepository.getAllReservations();
         ModelAndView mav = new ModelAndView("reservations");
         mav.addObject("reservations", liste);

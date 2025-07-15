@@ -12,52 +12,24 @@ import com.example.service.PretService;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 public class AdminController {
 
+    private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
+
     @Autowired
     private AdminService adminService;
-
-    @GetMapping("/admin")
-    public String voirAdmin() {
-        return "/admin";
-    }
-
-    @PostMapping("/admin")
-    public ModelAndView verifierAdmin(
-            @RequestParam("nom") String nom,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password) {
-
-        ModelAndView mav = new ModelAndView();
-        Admin admin = adminService.verifierConnexion(nom, email, password);
-
-        if (admin != null) {
-            mav.setViewName("redirect:/dashboard");
-        } else {
-            mav.setViewName("/admin");
-            mav.addObject("erreur", "Identifiants incorrects.");
-        }
-
-        return mav;
-    }
-
-    @GetMapping("/dashboard")
-    public String voirDashboard() {
-        return "adminDashboard";
-    }
-
-    @GetMapping("/admin/formPret")
-    public ModelAndView afficherFormulairePret() {
-        return new ModelAndView("formPret");
-    }
 
     @Autowired
     @Lazy
@@ -71,55 +43,84 @@ public class AdminController {
     @Lazy
     private ExemplaireService exemplaireService;
 
+    @Autowired
+    @Lazy
+    private PretRepository pretRepository;
+
+    @GetMapping("/admin")
+    public String voirAdmin() {
+        return "admin";
+    }
+
+    @PostMapping("/admin")
+    public ModelAndView verifierAdmin(
+            @RequestParam("nom") String nom,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password) {
+
+        ModelAndView mav = new ModelAndView();
+        Admin admin = adminService.verifierConnexion(nom, email, password);
+
+        if (admin != null) {
+            mav.setViewName("redirect:/admin/dashboard");
+        } else {
+            mav.setViewName("/admin");
+            mav.addObject("erreur", "Identifiants incorrects.");
+        }
+
+        return mav;
+    }
+
+
+    @GetMapping("/admin/formPret")
+    public ModelAndView afficherFormulairePret() {
+        return new ModelAndView("formPret");
+    }
+
     @PostMapping("/admin/savePret")
-    public ModelAndView enregistrerPret(
+    public String enregistrerPret(
             @RequestParam("nomAdherant") String nomAdherant,
             @RequestParam("titreLivre") String titreLivre,
             @RequestParam("typePret") String typePret,
             @RequestParam("dateEmprunt") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateEmprunt,
             @RequestParam("dateRetour") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetour,
-            @RequestParam("status") String status) {
+            @RequestParam("status") String status,
+            RedirectAttributes redirectAttributes) {
 
-        System.out.println(nomAdherant + " " + titreLivre + " " + typePret + " " + dateEmprunt.toString());
+        LOG.info("Tentative d'enregistrement d'un prêt pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
+
         var adherant = adherantRepository.findByNom(nomAdherant);
         if (adherant == null) {
-            ModelAndView mav = new ModelAndView("formPret");
-            mav.addObject("erreur", "Adhérant non trouvé pour : " + nomAdherant);
-            System.out.println("null adherant");
-            return mav;
-        }
-        Integer idAdherant = adherant.getIdAdherant();
-        Exemplaire exemplaireOpt = exemplaireService.getExemplaireByLivreTitre(titreLivre);
-        if (exemplaireOpt == null) {
-            ModelAndView mav = new ModelAndView("formPret");
-            mav.addObject("erreur", "Aucun exemplaire trouvé pour le titre : " + titreLivre);
-            System.out.println("empty");
-            return mav;
+            LOG.warn("Adhérant non trouvé : {}", nomAdherant);
+            redirectAttributes.addFlashAttribute("erreur", "Adhérant non trouvé pour : " + nomAdherant);
+            return "redirect:/admin/formPret";
         }
 
-        Integer idExemplaire = exemplaireOpt.getIdExemplaire();
+        Exemplaire exemplaire = exemplaireService.getExemplaireByLivreTitre(titreLivre);
+        if (exemplaire == null) {
+            LOG.warn("Aucun exemplaire trouvé pour le titre : {}", titreLivre);
+            redirectAttributes.addFlashAttribute("erreur", "Aucun exemplaire trouvé pour le titre : " + titreLivre);
+            return "redirect:/admin/formPret";
+        }
 
         boolean success = pretService.ajouterPret(
-                idAdherant,
-                idExemplaire,
+                adherant.getIdAdherant(),
+                exemplaire.getIdExemplaire(),
                 typePret,
                 dateEmprunt,
                 dateRetour,
                 status);
-        if (!success) {
-            System.out.println("ÉCHEC - Raisons possibles:");
-            System.out.println("1. Adhérant non trouvé");
-            System.out.println("2. Exemplaire non trouvé");
-            System.out.println("3. Erreur de validation");
+
+        if (success) {
+            LOG.info("Prêt enregistré avec succès pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
+            redirectAttributes.addFlashAttribute("successMessage", "Prêt enregistré avec succès.");
+        } else {
+            LOG.error("Échec de l'enregistrement du prêt pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
+            redirectAttributes.addFlashAttribute("erreur", "Échec de l'enregistrement du prêt. Vérifiez les données saisies.");
         }
 
-        return new ModelAndView(success ? "redirect:/admin/dashboard" : "formPret")
-                .addObject("erreur", success ? null : "Échec de l'ajout du prêt");
+        return "redirect:/admin/dashboard";
     }
-
-    @Autowired
-    @Lazy
-    private PretRepository pretRepository;
 
     @GetMapping("/admin/listePrets")
     public ModelAndView afficherListePrets() {
@@ -131,5 +132,4 @@ public class AdminController {
         mav.addObject("prets", liste);
         return mav;
     }
-
 }

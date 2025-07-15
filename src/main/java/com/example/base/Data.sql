@@ -2,7 +2,7 @@ INSERT INTO TypeAdherant (type, nombreQuota) VALUES
 ('Anonyme', 2),
 ('Etudiants', 5),
 ('Professeurs', 1),
-('Professeurs', 10);
+('Professionels', 10);
 
 INSERT INTO Admin (idAdmin, nom, email, motDePasse) VALUES
 ('Jean', 'jean@gmail.com', '1234');
@@ -70,3 +70,5 @@ VALUES
 (4, 9),
 (3, 10);
 
+INSERT INTO Abonnement (dateDebut, dateFin, idAdherant) VALUES
+('2025-01-01', '2025-05-01', 1);

@@ -45,15 +45,7 @@
                     cursor: pointer;
                 }
 
-                .voir_details {
-                    padding: 5px 10px;
-                    height: 40px;
-                    width: auto;
-                    border-radius: 10px;
-                    border: none;
-                    background-color: #e74c3c;
-                    color: #f8f9fa;
-                }
+                
             </style>
         </head>
 
