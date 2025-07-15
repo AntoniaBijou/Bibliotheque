@@ -1,37 +1,72 @@
-INSERT INTO TypeAdherant (idTypeAdherant, type, nombreQuota) VALUES
-(1, 'Anonyme', 2),
-(2, 'Etudiants', 5),
-(3, 'Professeurs', 1),
-(4, 'Professeurs', 10);
-
-INSERT INTO Adherant (idAdherant, nom, email, motDePasse, idTypeAdherant) VALUES
-(1, 'Rakoto', 'rakoto@gmail.com', '123', 2);
-
-INSERT INTO Auteur (idAuteur, nom) VALUES
-(1, 'Jean Rakotomalala'),
-(2, 'Soa Randrianarisoa'),
-(3, 'Mamy Andrianina');
-
-INSERT INTO Livre (idLivre, titre, ISBN, age, editeur, idAuteur) VALUES
-(1, 'Ny Andro Ratsy', '978-1234567890', 12, 'Trano Printy Malagasy', 1),
-(2, 'Fahendrena Malagasy', '978-0987654321', 16, 'Editions Soa', 2),
-(3, 'Tantara Gasy', '978-1122334455', 10, 'Maison du Livre', 3);
-
-INSERT INTO Categorie (idCategorie, nom) VALUES
-(1, 'Roman'),
-(2, 'Culture Malagasy'),
-(3, 'Histoire');
-
-INSERT INTO LivreCategorie (idLivre, idCategorie) VALUES
-(1, 1), -- Ny Andro Ratsy → Roman
-(2, 2), -- Fahendrena Malagasy → Culture Malagasy
-(3, 3), -- Tantara Gasy → Histoire
-(2, 1); -- Fahendrena Malagasy → aussi Roman
-
-INSERT INTO Exemplaire (idExemplaire, nombre, idLivre) VALUES
-(1, 3, 1), -- 3 exemplaires du livre id=1 (Ny Andro Ratsy)
-(2, 5, 2), -- 5 exemplaires du livre id=2 (Fahendrena Malagasy)
-(3, 2, 3); -- 2 exemplaires du livre id=3 (Tantara Gasy)
+INSERT INTO TypeAdherant (type, nombreQuota) VALUES
+('Anonyme', 2),
+('Etudiants', 5),
+('Professeurs', 1),
+('Professeurs', 10);
 
 INSERT INTO Admin (idAdmin, nom, email, motDePasse) VALUES
-(1, 'Jean', 'jean@gmail.com', '1234');
+('Jean', 'jean@gmail.com', '1234');
+
+INSERT INTO Adherant (nom, email, motDePasse, idTypeAdherant) VALUES
+('Rakoto', 'rakoto@gmail.com', '123', 2);
+
+INSERT INTO Auteur(nom) 
+VALUES 
+('Victor Hugo'),
+('Jules Verne'),
+('Emile Zola'),
+('Albert Camus'),
+('Molière');
+
+INSERT INTO Livre(titre, ISBN, age, editeur, idAuteur) 
+VALUES 
+('Les Miserables', 'ISBN-001-2025', 15, 'Editions Classiques', 1),
+('Vingt Mille Lieues sous les Mers', 'ISBN-002-2025', 12, 'Aventure Editions', 2),
+('Germinal', 'ISBN-003-2025', 16, 'Zola Editions', 3),
+('L etranger', 'ISBN-004-2025', 17, 'Camus Editions', 4),
+('Le Cid', 'ISBN-005-2025', 14, 'Theâtre Français', 5),
+('Notre-Dame de Paris', 'ISBN-006-2025', 15, 'Victor Editions', 1),
+('Voyage au Centre de la Terre', 'ISBN-007-2025', 12, 'Aventure Editions', 2),
+('Therèse Raquin', 'ISBN-008-2025', 16, 'Zola Editions', 3),
+('La Peste', 'ISBN-009-2025', 17, 'Camus Editions', 4),
+('L Avare', 'ISBN-010-2025', 14, 'Theâtre Français', 5);
+
+INSERT INTO Categorie(nom) 
+VALUES 
+('Roman'),
+('Aventure'),
+('Classique'),
+('Science-Fiction'),
+('Drame'),
+('Histoire'),
+('Theatre'),
+('Philosophie'),
+('Fantastique'),
+('Nouvelle');
+
+INSERT INTO LivreCategorie(idLivre, idCategorie) 
+VALUES 
+(1, 1), 
+(2, 2), 
+(3, 6), 
+(4, 8), 
+(5, 7), 
+(6, 1), 
+(7, 4), 
+(8, 1),
+(9, 8), 
+(10, 7); 
+
+INSERT INTO Exemplaire(nombre, idLivre) 
+VALUES 
+(5, 1),
+(3, 2),
+(4, 3),
+(2, 4),
+(6, 5),
+(5, 6),
+(3, 7),
+(2, 8),
+(4, 9),
+(3, 10);
+

@@ -4,8 +4,10 @@ D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\controller\Reser
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\model\Admin.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\service\LivreService.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\controller\AdminController.java
+D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\controller\LivreApiController.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\controller\LoginController.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\controller\ProlongementController.java
+D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\dto\LivreDTO.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\AdminRepository.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\model\Categorie.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\AdherantRepository.java

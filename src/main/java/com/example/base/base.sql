@@ -1,15 +1,15 @@
 CREATE DATABASE bibliotheque;
-use bibliotheque;
+USE bibliotheque;
 
 CREATE TABLE TypeAdherant(
-    idTypeAdherant INT,
+    idTypeAdherant INT AUTO_INCREMENT,
     type VARCHAR(50),
     nombreQuota INT,
     PRIMARY KEY(idTypeAdherant)
 );
 
 CREATE TABLE Adherant(
-   idAdherant INT,
+   idAdherant INT AUTO_INCREMENT,
    nom VARCHAR(50),
    email VARCHAR(50),
    motDePasse VARCHAR(50),
@@ -18,15 +18,14 @@ CREATE TABLE Adherant(
    PRIMARY KEY(idAdherant)
 );
 
-
 CREATE TABLE Auteur(
-   idAuteur INT,
+   idAuteur INT AUTO_INCREMENT,
    nom VARCHAR(50),
    PRIMARY KEY(idAuteur)
 );
 
 CREATE TABLE Livre(
-   idLivre INT,
+   idLivre INT AUTO_INCREMENT,
    titre VARCHAR(50),
    ISBN VARCHAR(50),
    age INT,
@@ -37,7 +36,7 @@ CREATE TABLE Livre(
 );
 
 CREATE TABLE Categorie(
-   idCategorie INT,
+   idCategorie INT AUTO_INCREMENT,
    nom VARCHAR(50),
    PRIMARY KEY(idCategorie)
 );
@@ -50,19 +49,16 @@ CREATE TABLE LivreCategorie(
    FOREIGN KEY(idCategorie) REFERENCES Categorie(idCategorie)
 );
 
-
-
 CREATE TABLE Exemplaire(
-   idExemplaire INT,
+   idExemplaire INT AUTO_INCREMENT,
    nombre INT,
    idLivre INT NOT NULL,
    PRIMARY KEY(idExemplaire),
    FOREIGN KEY(idLivre) REFERENCES Livre(idLivre)
 );
-----------------------------------------
 
 CREATE TABLE Pret(
-   idPret INT,
+   idPret INT AUTO_INCREMENT,
    dateEmprunt DATE,
    dateRetour DATE,
    typePret VARCHAR(50),
@@ -74,9 +70,8 @@ CREATE TABLE Pret(
    FOREIGN KEY(idAdherant) REFERENCES Adherant(idAdherant)
 );
 
-
 CREATE TABLE Prolongement(
-   idProlongement INT,
+   idProlongement INT AUTO_INCREMENT,
    dateDemande DATE,
    NouvelleDateRetour DATE,
    statut VARCHAR(50),
@@ -98,11 +93,9 @@ CREATE TABLE Reservation (
 );
 
 CREATE TABLE Admin(
-   idAdmin INT,
+   idAdmin INT AUTO_INCREMENT,
    nom VARCHAR(50),
    email VARCHAR(50),
    motDePasse VARCHAR(50),
    PRIMARY KEY(idAdmin)
 );
-
-

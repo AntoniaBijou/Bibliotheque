@@ -51,6 +51,7 @@ public class LoginController {
 
         return mav;
     }
+    
     @GetMapping("/acceuil")
     public ModelAndView Acceuil() {
         ModelAndView mav = new ModelAndView();

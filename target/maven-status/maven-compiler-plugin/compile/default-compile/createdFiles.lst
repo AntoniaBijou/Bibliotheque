@@ -12,6 +12,7 @@ com\example\controller\AdminReservationController.class
 com\example\repository\LivreRepository.class
 com\example\model\Auteur.class
 com\example\model\Pret.class
+com\example\controller\LivreApiController.class
 com\example\repository\PretRepository.class
 com\example\service\ProlongementService.class
 com\example\controller\AdminProlongementController.class
@@ -29,4 +30,5 @@ com\example\repository\ProlongementRepository.class
 com\example\service\LivreService.class
 com\example\model\TypeAdherant.class
 com\example\repository\AdminRepository.class
+com\example\dto\LivreDTO.class
 com\example\service\ExemplaireService.class

@@ -31,8 +31,8 @@ public class Adherant {
     public Adherant() {
     }
 
-    public Adherant(Integer idAdherant, String nom, String email, 
-                   String motDePasse, TypeAdherant typeAdherant) {
+    public Adherant(Integer idAdherant, String nom, String email,
+            String motDePasse, TypeAdherant typeAdherant) {
         this.idAdherant = idAdherant;
         this.nom = nom;
         this.email = email;
@@ -97,9 +97,9 @@ public class Adherant {
     @Override
     public String toString() {
         return "Adherant{" +
-               "idAdherant=" + idAdherant +
-               ", nom='" + nom + '\'' +
-               ", email='" + email + '\'' +
-               '}';
+                "idAdherant=" + idAdherant +
+                ", nom='" + nom + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

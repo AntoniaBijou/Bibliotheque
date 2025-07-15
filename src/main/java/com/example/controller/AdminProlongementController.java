@@ -33,22 +33,21 @@ public class AdminProlongementController {
         return mav;
     }
 
-@PostMapping("/prolongement/valider/{id}")
-public String validerProlongement(@PathVariable("id") Integer id) {
-    Prolongement prolongement = prolongementService.trouverParId(id);
+    @PostMapping("/prolongement/valider/{id}")
+    public String validerProlongement(@PathVariable("id") Integer id) {
+        Prolongement prolongement = prolongementService.trouverParId(id);
 
-    if (prolongement != null) {
-        Pret pret = prolongement.getPret();
-        pret.setDateRetour(prolongement.getNouvelleDateRetour());
-        pretService.enregistrerPret(pret);
+        if (prolongement != null) {
+            Pret pret = prolongement.getPret();
+            pret.setDateRetour(prolongement.getNouvelleDateRetour());
+            pretService.enregistrerPret(pret);
 
-        prolongement.setStatut("en cours");  
-        prolongementService.enregistrerProlongement(prolongement);
+            prolongement.setStatut("en cours");
+            prolongementService.enregistrerProlongement(prolongement);
+        }
+
+        return "redirect:/admin/listeProlongements";
     }
-
-    return "redirect:/admin/listeProlongements";
-}
-
 
     @PostMapping("/prolongement/refuser/{id}")
     public String refuserProlongement(@PathVariable("id") Integer id) {

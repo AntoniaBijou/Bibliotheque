@@ -26,9 +26,9 @@ public class AdminReservationController {
 
         System.out.println("Nombre de réservations trouvées : " + reservations.size());
         for (ReservationProjection r : reservations) {
-            
+
             System.out.println("Reservation : " + r.getTitreLivre() + " par " + r.getNomAdherant());
-            
+
         }
 
         mav.addObject("reservations", reservations);
@@ -52,18 +52,18 @@ public class AdminReservationController {
         return "redirect:/admin";
     }
 
-@PostMapping("/admin/valider")
-public ModelAndView validerReservation(@RequestParam("idReservation") int idReservation) {
-    Optional<Reservation> optional = reservationRepository.findById(idReservation);
-    if (optional.isPresent()) {
-        Reservation r = optional.get();
-        r.setStatut("confirme"); 
-        reservationRepository.save(r);
-    }
+    @PostMapping("/admin/valider")
+    public ModelAndView validerReservation(@RequestParam("idReservation") int idReservation) {
+        Optional<Reservation> optional = reservationRepository.findById(idReservation);
+        if (optional.isPresent()) {
+            Reservation r = optional.get();
+            r.setStatut("confirme");
+            reservationRepository.save(r);
+        }
 
-    List<ReservationProjection> liste = reservationRepository.getAllReservations();
-    ModelAndView mav = new ModelAndView("reservations");
-    mav.addObject("reservations", liste);
-    return mav;
-}
+        List<ReservationProjection> liste = reservationRepository.getAllReservations();
+        ModelAndView mav = new ModelAndView("reservations");
+        mav.addObject("reservations", liste);
+        return mav;
+    }
 }

@@ -51,7 +51,7 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     public String voirDashboard() {
-        return "adminDashboard"; 
+        return "adminDashboard";
     }
 
     @GetMapping("/admin/formPret")
@@ -100,7 +100,7 @@ public class AdminController {
         Integer idExemplaire = exemplaireOpt.getIdExemplaire();
 
         boolean success = pretService.ajouterPret(
-                idAdherant, 
+                idAdherant,
                 idExemplaire,
                 typePret,
                 dateEmprunt,
