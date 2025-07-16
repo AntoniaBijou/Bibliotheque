@@ -35,5 +35,6 @@ com\example\service\LivreService.class
 com\example\model\TypeAdherant.class
 com\example\service\AbonnementService.class
 com\example\repository\AdminRepository.class
+com\example\repository\TypeAdherantRepository.class
 com\example\dto\LivreDTO.class
 com\example\service\ExemplaireService.class

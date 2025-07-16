@@ -25,3 +25,4 @@ requette maka ny nombre quota par type adherant
 manambotra table vaovao : abonnements
 
 
+Raha ohatra ka tsy entre anleh date d'abonnement izy no manao pret dia tokony tsy afaka manao pret 

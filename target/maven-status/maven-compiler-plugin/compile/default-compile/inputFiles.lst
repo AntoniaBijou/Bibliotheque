@@ -21,6 +21,7 @@ D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\model\Pret.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\model\Exemplaire.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\AbonnementRepository.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\PretRepository.java
+D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\TypeAdherantRepository.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\dto\AdherantAbonnementDTO.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\model\Abonnement.java
 D:\ITU\S4\MrNaina\SPRING\Bibliotheque\src\main\java\com\example\repository\ProlongementRepository.java

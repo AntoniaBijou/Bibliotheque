@@ -10,6 +10,7 @@ import com.example.service.ExemplaireService;
 import com.example.service.PretService;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 @Controller
 public class AdminController {
@@ -71,10 +71,9 @@ public class AdminController {
         return mav;
     }
 
-
     @GetMapping("/admin/formPret")
-    public ModelAndView afficherFormulairePret() {
-        return new ModelAndView("formPret");
+    public String afficherFormulairePret() {
+        return "formPret";
     }
 
     @PostMapping("/admin/savePret")
@@ -87,22 +86,25 @@ public class AdminController {
             @RequestParam("status") String status,
             RedirectAttributes redirectAttributes) {
 
-        LOG.info("Tentative d'enregistrement d'un prêt pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
+        LOG.info("Tentative d'enregistrement d'un prêt pour l'adherent '{}' et le livre '{}'", nomAdherant, titreLivre);
 
+        // Verification de l'adherent
         var adherant = adherantRepository.findByNom(nomAdherant);
         if (adherant == null) {
-            LOG.warn("Adhérant non trouvé : {}", nomAdherant);
-            redirectAttributes.addFlashAttribute("erreur", "Adhérant non trouvé pour : " + nomAdherant);
+            LOG.warn("Adherant non trouve : {}", nomAdherant);
+            redirectAttributes.addFlashAttribute("erreur", "Adherant non trouve : " + nomAdherant);
             return "redirect:/admin/formPret";
         }
 
+        // Verification de l'exemplaire
         Exemplaire exemplaire = exemplaireService.getExemplaireByLivreTitre(titreLivre);
         if (exemplaire == null) {
-            LOG.warn("Aucun exemplaire trouvé pour le titre : {}", titreLivre);
-            redirectAttributes.addFlashAttribute("erreur", "Aucun exemplaire trouvé pour le titre : " + titreLivre);
+            LOG.warn("Aucun exemplaire trouve pour le titre : {}", titreLivre);
+            redirectAttributes.addFlashAttribute("erreur", "Aucun exemplaire trouve pour le titre : " + titreLivre);
             return "redirect:/admin/formPret";
         }
 
+        // Tentative d'ajout du prêt
         boolean success = pretService.ajouterPret(
                 adherant.getIdAdherant(),
                 exemplaire.getIdExemplaire(),
@@ -112,22 +114,47 @@ public class AdminController {
                 status);
 
         if (success) {
-            LOG.info("Prêt enregistré avec succès pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
-            redirectAttributes.addFlashAttribute("successMessage", "Prêt enregistré avec succès.");
+            LOG.info("Prêt enregistre avec succès pour l'adherent '{}' et le livre '{}'", nomAdherant, titreLivre);
+            redirectAttributes.addFlashAttribute("successMessage", "Prêt enregistre avec succès.");
+            return "redirect:/admin/dashboard";
         } else {
-            LOG.error("Échec de l'enregistrement du prêt pour l'adhérent '{}' et le livre '{}'", nomAdherant, titreLivre);
-            redirectAttributes.addFlashAttribute("erreur", "Échec de l'enregistrement du prêt. Vérifiez les données saisies.");
+            // Verifier la raison de l'echec
+            var abonnementOpt = pretService.getAbonnementRepository().findByAdherant(adherant);
+            if (!abonnementOpt.isPresent()) {
+                LOG.warn("Aucun abonnement trouve pour l'adherent : {}", nomAdherant);
+                redirectAttributes.addFlashAttribute("erreur",
+                        "Aucun abonnement actif pour l'adherent : " + nomAdherant);
+            } else {
+                LocalDate debutAbonnement = abonnementOpt.get().getDateDebut().toInstant()
+                        .atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate finAbonnement = abonnementOpt.get().getDateFin().toInstant().atZone(ZoneId.systemDefault())
+                        .toLocalDate();
+                if (dateEmprunt.isBefore(debutAbonnement) || dateEmprunt.isAfter(finAbonnement) ||
+                        dateRetour.isBefore(debutAbonnement) || dateRetour.isAfter(finAbonnement)) {
+                    LOG.warn("Les dates du prêt ({}-{}) ne sont pas dans la periode d'abonnement ({}-{})",
+                            dateEmprunt, dateRetour, debutAbonnement, finAbonnement);
+                    redirectAttributes.addFlashAttribute("erreur",
+                            "Les dates du prêt doivent être comprises entre " + debutAbonnement + " et "
+                                    + finAbonnement);
+                } else if (adherant.getTypeAdherant() == null || adherant.getTypeAdherant().getNombreQuota() <= 0) {
+                    LOG.warn("Quota insuffisant pour l'adherent : {}", nomAdherant);
+                    redirectAttributes.addFlashAttribute("erreur",
+                            "Quota de prêts epuise pour l'adherent : " + nomAdherant);
+                } else {
+                    LOG.error("echec de l'enregistrement du prêt pour l'adherent '{}' et le livre '{}'", nomAdherant,
+                            titreLivre);
+                    redirectAttributes.addFlashAttribute("erreur",
+                            "echec de l'enregistrement du prêt. Verifiez les donnees saisies.");
+                }
+            }
+            return "redirect:/admin/formPret";
         }
-
-        return "redirect:/admin/dashboard";
     }
 
     @GetMapping("/admin/listePrets")
     public ModelAndView afficherListePrets() {
         List<Pret> liste = pretRepository.findAll();
-        for (Pret pret : liste) {
-            System.out.println(pret.getAdherant().getNom());
-        }
+        LOG.info("Recuperation de {} prêts", liste.size());
         ModelAndView mav = new ModelAndView("listePrets");
         mav.addObject("prets", liste);
         return mav;

@@ -1,74 +1,59 @@
 INSERT INTO TypeAdherant (type, nombreQuota) VALUES
-('Anonyme', 2),
-('Etudiants', 5),
-('Professeurs', 1),
-('Professionels', 10);
+('Etudiant', 2),
+('Enseignant', 3),
+('Professionels', 4);
 
-INSERT INTO Admin (idAdmin, nom, email, motDePasse) VALUES
+INSERT INTO Admin (nom, email, motDePasse) VALUES
 ('Jean', 'jean@gmail.com', '1234');
 
 INSERT INTO Adherant (nom, email, motDePasse, idTypeAdherant) VALUES
-('Rakoto', 'rakoto@gmail.com', '123', 2);
+('Amine', 'Amine@gmail.com', '111', 1),
+('Sarah', 'Sarah@gmail.com', '222', 1),
+('Youssef', 'Youssef@gmail.com', '333', 1),
+('Nadia', 'Nadia@gmail.com', '444', 2),
+('Karim', 'Karim@gmail.com', '555', 2),
+('Salima', 'Salima@gmail.com', '666', 2),
+('Rachid', 'Rachid@gmail.com', '777', 3),
+('Amina', 'Amina@gmail.com', '888', 3);
+
 
 INSERT INTO Auteur(nom) 
 VALUES 
 ('Victor Hugo'),
-('Jules Verne'),
-('Emile Zola'),
 ('Albert Camus'),
-('Molière');
+('JK Rowling');
 
 INSERT INTO Livre(titre, ISBN, age, editeur, idAuteur) 
 VALUES 
-('Les Miserables', 'ISBN-001-2025', 15, 'Editions Classiques', 1),
-('Vingt Mille Lieues sous les Mers', 'ISBN-002-2025', 12, 'Aventure Editions', 2),
-('Germinal', 'ISBN-003-2025', 16, 'Zola Editions', 3),
-('L etranger', 'ISBN-004-2025', 17, 'Camus Editions', 4),
-('Le Cid', 'ISBN-005-2025', 14, 'Theâtre Français', 5),
-('Notre-Dame de Paris', 'ISBN-006-2025', 15, 'Victor Editions', 1),
-('Voyage au Centre de la Terre', 'ISBN-007-2025', 12, 'Aventure Editions', 2),
-('Therèse Raquin', 'ISBN-008-2025', 16, 'Zola Editions', 3),
-('La Peste', 'ISBN-009-2025', 17, 'Camus Editions', 4),
-('L Avare', 'ISBN-010-2025', 14, 'Theâtre Français', 5);
+('Les Miserables', '9782070409189', 20, 'Editions Classiques', 1),
+('L etranger', '9782070360022', 18, 'Aventure Editions', 2),
+('Harry Potter a l ecole des sorciers', '9782070643026', 25, 'Zola Editions', 3);
 
 INSERT INTO Categorie(nom) 
 VALUES 
-('Roman'),
-('Aventure'),
-('Classique'),
-('Science-Fiction'),
-('Drame'),
-('Histoire'),
-('Theatre'),
+('Litterature classique'),
 ('Philosophie'),
-('Fantastique'),
-('Nouvelle');
+('Jeunesse'),
+('Fantastique');
 
 INSERT INTO LivreCategorie(idLivre, idCategorie) 
 VALUES 
 (1, 1), 
 (2, 2), 
-(3, 6), 
-(4, 8), 
-(5, 7), 
-(6, 1), 
-(7, 4), 
-(8, 1),
-(9, 8), 
-(10, 7); 
+(3, 3);
+(3, 4);
 
 INSERT INTO Exemplaire(nombre, idLivre) 
 VALUES 
-(5, 1),
-(3, 2),
-(4, 3),
-(2, 4),
-(6, 5),
-(5, 6),
-(3, 7),
-(2, 8),
-(4, 9),
-(3, 10);
+(3, 1),
+(2, 2),
+(1, 3);
 
 INSERT INTO Abonnement (dateDebut, dateFin, idAdherant) VALUES
-('2025-01-01', '2025-05-01', 1);
+('2025-02-01', '2025-07-01', 2),
+('2025-04-01', '2025-12-01', 3),
+('2025-07-01', '2026-07-01', 4),
+('2025-08-01', '2026-05-01', 5),
+('2025-07-01', '2026-06-01', 6),
+('2025-06-01', '2025-12-01', 7),
+('2025-10-01', '2025-06-01', 8);
